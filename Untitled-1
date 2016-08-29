@@ -1,0 +1,11 @@
+{
+   latitude:37.8267,
+   longitude:-122.423,
+   timezone:"America/Los_Angeles",
+   offset:-7,
+   currently:Object,
+   minutely:Object,
+   hourly:Object,
+   daily:Object,
+   flags:Object
+}
