@@ -13,7 +13,6 @@ import { routes } from './routes';
 
 bootstrap(App, [
     HTTP_PROVIDERS,
-    JSONP_PROVIDERS,
     FormBuilder,
     provideRouter(routes)
 ]);

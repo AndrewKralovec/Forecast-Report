@@ -9,3 +9,16 @@
    daily:Object,
    flags:Object
 }
+
+    search(latitude: any, longitude: any){
+            let headers = new Headers(); 
+            headers.append('Content-Type', 'application/json'); 
+            let body = JSON.stringify({ latitude, longitude });
+            this.http.post('/api/SampleData/CurrentForecasts',body, { headers: headers })
+            .map(response => response.json())
+            .subscribe(
+                data =>  this.Debug(data),
+                err =>  console.log("Error: \n"+err),
+                () => console.log('Get Complete')
+            ); 
+    }
