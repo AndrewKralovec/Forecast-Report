@@ -2,7 +2,7 @@ import { Component }        from '@angular/core';
 import { CHART_DIRECTIVES } from 'angular2-highcharts'; 
 
 @Component({
-    selector: 'my-chart',
+    selector: 'chart',
     directives: [CHART_DIRECTIVES],
     template: require('./chart.html'),
     styles: [`
