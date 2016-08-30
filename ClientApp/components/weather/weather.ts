@@ -5,6 +5,7 @@ import { Forecast } from '../../models/forecast';
 import { Location } from '../../models/location';
 import { ForcastService } from '../../services/forecastService.ts';
 
+
 @Component({
     selector: 'weather',
     directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
@@ -31,18 +32,11 @@ export class Weather {
     constructor(public fs:ForcastService){
         // Geolocation.
         // this.refresh(); 
-        fs.getForcast(this.location.latitude,this.location.longitude).subscribe(result => {
+        fs.getForcast(this.location.latitude,this.location.longitude)
+        .subscribe(result => {
             this.forecast = result ;
             console.log(this.forecast);
         }); 
-    }
-    refresh(){
-        console.log("Refresh");
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.showPosition, this.showError); 
-        } else {
-          console.log("Browser doesn't support Geolocation"); 
-        }
     }
     Debug(data:any){
         console.log("Data"); 
@@ -56,6 +50,17 @@ export class Weather {
                 err =>  console.log("Error: \n"+err),
                 () => console.log('Get Complete')
             ); 
+    }
+    dateFormat(unix:number){
+        return new Date(unix * 1000); 
+    }
+    refresh(){
+        console.log("Refresh");
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.showPosition, this.showError); 
+        } else {
+          console.log("Browser doesn't support Geolocation"); 
+        }
     }
     showPosition(position) {
         var pos = {
