@@ -1,16 +1,24 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
-import {Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http'
 
+import { Forecast } from '../../models/forecast';
+import { Location } from '../../models/location';
+import { ForcastService } from '../../services/forecastService.ts';
 
 @Component({
     selector: 'weather',
     directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
+    providers: [ForcastService], 
     template: require('./weather.html')
 })
 export class Weather {
-    public data:any; 
-    public days = [
+    private data:any; 
+    private forecast:Forecast; 
+    private location:Location = {
+        latitude:41.8093699,
+        longitude:-89.8093699
+    }; 
+    private days = [
         { title:"Monday",temp:25,info:"Going to be cold" },
         { title:"Tuesday",temp:35,info:"Going to be cold" },
         { title:"Wednesday",temp:45,info:"Going to be cold" },
@@ -20,16 +28,18 @@ export class Weather {
         { title:"Sunday",temp:85,info:"Going to be cold" },
     ]; 
     
-    constructor(public http:Http){
-        // Try HTML5 geolocation.
+    constructor(public fs:ForcastService){
+        // Geolocation.
+        // this.refresh(); 
+        fs.getForcast(this.location.latitude,this.location.longitude).subscribe(result => {
+            this.forecast = result ;
+            console.log(this.forecast);
+        }); 
+    }
+    refresh(){
+        console.log("Refresh");
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = {
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude
-                };
-                console.log("Postion: "+pos); 
-            }); 
+            navigator.geolocation.getCurrentPosition(this.showPosition, this.showError); 
         } else {
           console.log("Browser doesn't support Geolocation"); 
         }
@@ -40,18 +50,36 @@ export class Weather {
         console.log(this.data); 
     }
     search(latitude: any, longitude: any){
-        let body = latitude +","+ longitude ;
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({
-            headers: headers,           
-            search: new URLSearchParams('location='+body)
-        });
-        this.http.post('/api/SampleData/CurrentForecasts', null, options)
-        .map(response => response.json())
-        .subscribe(
-            data =>  this.Debug(data),
-            err =>  console.log("Error: \n"+err),
-            () => console.log('Get Complete')
-        ); 
+        this.fs.getForcast(latitude,longitude)
+            .subscribe(
+                data =>  this.Debug(data),
+                err =>  console.log("Error: \n"+err),
+                () => console.log('Get Complete')
+            ); 
     }
+    showPosition(position) {
+        var pos = {
+            latitude:position.coords.latitude,
+            longitude:position.coords.longitude
+        };
+        console.log("Postion: "+pos.latitude+" "+pos.longitude); 
+    }
+
+    showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                console.log("User denied the request for Geolocation."); 
+                break;
+            case error.POSITION_UNAVAILABLE:
+                console.log("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                console.log("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                console.log("An unknown error occurred.");
+                break;
+        }
+    }
+    
 }

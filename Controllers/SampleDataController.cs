@@ -32,26 +32,7 @@ namespace BlueWolf.Controllers
                     return Content(forecast, "application/json");
                 }
             }
-            return Json(null); 
-        }
-        [HttpGet("[action]")]
-        public async Task<IActionResult> SendRequest()
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(" https://api.forecast.io/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                // HTTP GET
-                HttpResponseMessage response = await client.GetAsync("forecast/6032920e453a7d19ea39cf5f0c03c120/37.8267,-122.423");
-                if (response.IsSuccessStatusCode)
-                {
-                    var forecast = await response.Content.ReadAsStringAsync();
-                    return Content(forecast, "application/json");
-                }
-            }
-            return Json(null); 
+            return Json(new { forecast = false }); 
         }
     }
 }

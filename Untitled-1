@@ -9,6 +9,16 @@
    daily:Object,
    flags:Object
 }
+currently:Object
+daily:Object
+flags:Object
+hourly:Object
+latitude:41.8093699
+longitude:-87.8729122
+minutely:Object
+offset:-5
+timezone:"America/Chicago"
+
 
     search(latitude: any, longitude: any){
             let headers = new Headers(); 
@@ -22,3 +32,10 @@
                 () => console.log('Get Complete')
             ); 
     }
+    
+            this.fs.getForcast(latitude,longitude)
+            .subscribe(
+                data =>  this.Debug(data),
+                err =>  console.log("Error: \n"+err),
+                () => console.log('Get Complete')
+            ); 

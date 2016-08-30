@@ -3,13 +3,14 @@
         <div class="col-lg-10 col-lg-offset-1 col-md-6 ">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <div class="row">
+                    <div class="row" *ngIf="forecast">
                         <div class="col-xs-3">
                             <span class="glyphicon glyphicon-cloud cloud-header"></span>
+                            <div>{{forecast.currently.summary}}</div>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <div class="huge">32 &deg;</div>
-                            <div>Location</div>
+                            <div class="huge">{{forecast.currently.apparentTemperature}} &deg;</div>
+                            <div>{{forecast.timezone}}</div>
                         </div>
                     </div>
                 </div>
