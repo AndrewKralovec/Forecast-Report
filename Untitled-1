@@ -38,16 +38,14 @@ timezone:"America/Chicago"
                 data =>  this.Debug(data),
                 err =>  console.log("Error: \n"+err),
                 () => console.log('Get Complete')
+  
+  
             ); 
           
-          import { bootstrap }                    from '@angular/platform-browser-dynamic';
+import { bootstrap }                    from '@angular/platform-browser-dynamic';
 import { Component }                    from '@angular/core';
-import { CHART_DIRECTIVES, Highcharts } from 'angular2-highcharts'; 
+import { CHART_DIRECTIVES } from 'angular2-highcharts'; 
 
-
-Highcharts.setOptions({
-  colors: ['#058DC7', '#50B432', '#ED561B']
-});
 @Component({
     selector: 'my-app',
     directives: [CHART_DIRECTIVES],
@@ -71,7 +69,7 @@ class AppComponent {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         },
            series: [{
-            data: [-10, -5, 0, 28, 35, 65, 85, 90, 5, 0, -5],
+            data: [-10, -5, 0, 28, 35, 65, 85, 90, 5, -5],
             zones: [{
                 value: 0,
                 color: '#00ccff'

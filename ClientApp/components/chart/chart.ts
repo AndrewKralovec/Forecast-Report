@@ -1,24 +1,12 @@
-import { Component }        from '@angular/core';
-import { CHART_DIRECTIVES } from 'angular2-highcharts'; 
+import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { WeatherChart } from './weather-chart';
 
 @Component({
-    selector: 'chart',
-    directives: [CHART_DIRECTIVES],
-    template: require('./chart.html'),
-    styles: [`
-      chart {
-        display: block;
-      }
-    `]
+    selector: 'weather-chart',
+    directives: [WeatherChart],
+    template: require('./chart.html')
 })
 export class Chart {
-    constructor() {
-        this.options = {
-            title : { text : 'Weather chart' },
-            series: [{
-                data: [29.9, 71.5, 106.4, 129.2],
-            }]
-        };
-    }
-    options: Object;
+    
 }

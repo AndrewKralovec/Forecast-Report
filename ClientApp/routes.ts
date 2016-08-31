@@ -5,6 +5,7 @@ import { Counter } from './components/counter/counter';
 import { Weather } from './components/weather/weather';
 import { Chart } from './components/chart/chart';
 
+
 export const routes: RouterConfig = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: Home },
