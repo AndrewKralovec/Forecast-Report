@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CHART_DIRECTIVES } from 'angular2-highcharts'; 
+import { CHART_DIRECTIVES } from 'angular2-highcharts';
 
 @Component({
     selector: 'weather-chart',
@@ -12,6 +12,7 @@ import { CHART_DIRECTIVES } from 'angular2-highcharts';
     `]
 })
 export class WeatherChart {
+    public options: Object;
     constructor() {
         this.options = {
             title : { 
@@ -19,7 +20,7 @@ export class WeatherChart {
             },
             yAxis: {
                 title: {
-                    text: 'Tempature '
+                    text: 'Tempature'
                 }
             },
             xAxis: {
@@ -44,6 +45,5 @@ export class WeatherChart {
                     }]
             }]
         };
-    } 
-    options: Object;
+    }     
 }

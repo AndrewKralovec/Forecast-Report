@@ -3,24 +3,24 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 
 import { Forecast } from '../../models/forecast';
 import { Location } from '../../models/location';
-import { ForcastService } from '../../services/forecastService.ts';
+import { ForecastService } from '../../services/forecastService.ts';
 
 
 @Component({
     selector: 'weather',
     directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
-    providers: [ForcastService], 
+    providers: [ForecastService], 
     template: require('./weather.html')
 })
 export class Weather {
-    private data:any; 
+    // Current ForecastS
     private forecast:Forecast; 
     // Default location coordniates 
     private location:Location = {
         latitude:41.8093699,
         longitude:-89.8093699
     }; 
-    constructor(public fs:ForcastService){
+    constructor(public fs:ForecastService){
         fs.getForcast(this.location.latitude,this.location.longitude)
         .subscribe(result => {
             this.forecast = result ;
