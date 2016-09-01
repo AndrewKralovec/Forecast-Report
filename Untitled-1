@@ -94,3 +94,71 @@ class AppComponent {
 }
 
 bootstrap(AppComponent);
+import { Component, Input } from '@angular/core';
+import { CHART_DIRECTIVES } from 'angular2-highcharts';
+
+@Component({
+    selector: 'weather-chart',
+    directives: [CHART_DIRECTIVES],
+    template: `<div *ngIf="myData">
+                <chart [options]="options"
+                    (load)="saveInstance($event.context)">
+                </chart>
+                <div>
+                    <button (click)="test()">Test</button>
+                </div>
+               </div>`, 
+    styles: [`
+      chart {
+        display: block;
+      }
+    `]
+})
+export class WeatherChart {
+    @Input()
+    myData: Array<String>;
+    public options: any;
+    public chart: HighchartsChartObject; 
+    ngOnInit() {
+        this.options = {
+            title : { 
+                text : 'Weather chart'
+            },
+            yAxis: {
+                title: {
+                    text: 'Tempature'
+                }
+            },
+            xAxis: {
+                categories: this.myData
+            },
+            series: [{
+                data: [-10, -5, 0, 28, 35, 65, 85, 90, 5, -5],
+                zones: [{
+                        value: 0,
+                        color: '#00ccff'
+                    },{
+                        value: 32,
+                        color: '#ffff00'
+                    },{
+                        value: 60,
+                        color: '#ff9933'
+                    },{
+                        value: 80,
+                        color: '#ff3300'
+                    },{
+                        color: '#ff3300'
+                    }]
+            }]
+        };
+    }
+    saveInstance(chartInstance:any){
+        this.chart = chartInstance; 
+    }
+    test(){
+      console.log(this.options);
+      this.options.title = {text : 'Test chart'}; 
+      console.log(this.options);
+      this.chart.redraw(); 
+    }   
+}

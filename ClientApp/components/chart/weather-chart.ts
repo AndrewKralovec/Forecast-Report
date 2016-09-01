@@ -4,7 +4,14 @@ import { CHART_DIRECTIVES } from 'angular2-highcharts';
 @Component({
     selector: 'weather-chart',
     directives: [CHART_DIRECTIVES],
-    template: `<chart [options]="options"></chart>`, 
+    template: `<div *ngIf="myData">
+                <chart [options]="options"
+                    (load)="saveInstance($event.context)">
+                </chart>
+                <div>
+                    <button (click)="test()">Test</button>
+                </div>
+               </div>`, 
     styles: [`
       chart {
         display: block;
@@ -12,38 +19,18 @@ import { CHART_DIRECTIVES } from 'angular2-highcharts';
     `]
 })
 export class WeatherChart {
-    public options: Object;
-    constructor() {
+    @Input()
+    myData: Array<String>;
+       constructor() {
         this.options = {
-            title : { 
-                text : 'Weather chart'
-            },
-            yAxis: {
-                title: {
-                    text: 'Tempature'
-                }
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            series: [{
-                data: [-10, -5, 0, 28, 35, 65, 85, 90, 5, -5],
-                zones: [{
-                        value: 0,
-                        color: '#00ccff'
-                    },{
-                        value: 32,
-                        color: '#ffff00'
-                    },{
-                        value: 60,
-                        color: '#ff9933'
-                    },{
-                        value: 80,
-                        color: '#ff3300'
-                    },{
-                        color: '#ff3300'
-                    }]
-            }]
+          chart: { type: 'spline' },
+          title: { text : 'dynamic data example'},
+          series: [{ data: [2,3,5,8,13] }]
         };
-    }     
+    }
+    chart : HighchartsChartObject;
+    options: HighchartsOptions;
+    saveInstance(chartInstance) {
+        this.chart = chartInstance;
+    }
 }

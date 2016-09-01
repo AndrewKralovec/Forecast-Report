@@ -14,9 +14,9 @@ import { ForecastService } from '../../services/forecastService.ts';
 })
 export class Weather {
     // Current ForecastS
-    private forecast:Forecast; 
+    public forecast:Forecast; 
     // Default location coordniates 
-    private location:Location = {
+    public location:Location = {
         latitude:41.8093699,
         longitude:-89.8093699
     }; 
