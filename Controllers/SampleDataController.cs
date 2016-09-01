@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Net.Http;
 using System.Net.Http.Headers;
-
+using BlueWolf.Models; 
 namespace BlueWolf.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
-        private static string[] Summaries = new[]
+        public AppKeyConfig AppConfigs { get; }
+        public SampleDataController(IOptions<AppKeyConfig> appkeys)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+            AppConfigs = appkeys.Value;
+        }
         [HttpPost("[action]")]
         public async Task<IActionResult> CurrentForecasts(string location)
         {
@@ -31,8 +33,12 @@ namespace BlueWolf.Controllers
                     var forecast = await response.Content.ReadAsStringAsync();
                     return Content(forecast, "application/json");
                 }
+                else
+                {
+                    throw new HttpRequestException("Bad request"); 
+                }
+                
             }
-            return Json(new { forecast = false }); 
         }
     }
 }

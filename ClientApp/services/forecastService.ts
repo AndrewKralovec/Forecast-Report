@@ -3,7 +3,9 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 
 @Injectable()
 export class ForecastService {
-    constructor(public http:Http){}
+    constructor(private http:Http){
+        
+    }
     getForcast(latitude:any, longitude:any){
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({
