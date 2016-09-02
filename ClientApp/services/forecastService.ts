@@ -3,6 +3,10 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 
 @Injectable()
 export class ForecastService {
+    public weekday:string[] = [
+        "Sunday", "Monday", "Tuesday","Wednesday",
+        "Thursday", "Friday","Saturday"
+    ]; 
     constructor(private http:Http){
         
     }

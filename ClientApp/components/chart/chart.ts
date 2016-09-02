@@ -42,7 +42,7 @@ export class Chart {
         .subscribe(result => {
             this.forecast = result ;
             this.dateSet = {
-                x : this.formatSet(result.daily.data,"time"), 
+                x : this.timeSet(result.daily.data), 
                 y : "",
                 data : []
             }; 
@@ -61,6 +61,13 @@ export class Chart {
         let result:any = new Array();
         for (let i of block) {
             result.push(i[prop]); 
+        }
+        return result; 
+    }
+    timeSet(block:Array<any>){
+        let result:any = new Array();
+        for (let i of block) {
+            result.push(this.fs.weekday[new Date(i['time'] * 1000).getDay()]); 
         }
         return result; 
     }
