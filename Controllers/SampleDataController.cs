@@ -25,7 +25,7 @@ namespace BlueWolf.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(" https://api.forecast.io/");
+                client.BaseAddress = new Uri("https://api.forecast.io/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -35,6 +35,30 @@ namespace BlueWolf.Controllers
                 {
                     var forecast = await response.Content.ReadAsStringAsync();
                     return Content(forecast, "application/json");
+                }
+                else
+                {
+                    throw new HttpRequestException("Bad request"); 
+                }
+                
+            }
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> getLong()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/geocode/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // HTTP GET
+                HttpResponseMessage response = await client.GetAsync("json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCcniZbdifq4_mcXynT4tPuVkGIXRhvikI");
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    var car = result ; 
+                    return Content(result, "application/json");
                 }
                 else
                 {

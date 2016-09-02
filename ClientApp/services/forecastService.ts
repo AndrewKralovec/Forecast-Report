@@ -28,5 +28,13 @@ export class ForecastService {
         return this.http.post('/api/SampleData/CurrentForecasts', null, options) 
                    .map(response  => response.json());
     }
+    getGeocode(){
+        this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA')
+        .map(response  => response.json())
+        .subscribe(result => {
+                console.log(result);
+                console.log(result.results[0].geometry.location);
+        });
+    }
  
 }
