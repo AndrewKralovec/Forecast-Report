@@ -19,9 +19,9 @@ namespace BlueWolf.Controllers
         {
             this.cs = "Data Source=/home/andrew/Elearn.db"; 
         }
-        [HttpPost]
-        public IActionResult find(User un){
-            var test = un; 
+        [HttpPost("[action]")]
+        public IActionResult find([FromBody] User user){
+            var un = user.email ; 
             string pwd = null; 
             int count=0; 
             using(SqliteConnection con = new SqliteConnection(cs))

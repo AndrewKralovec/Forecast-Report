@@ -34,11 +34,8 @@ export class LoginService {
         }
     } 
     find(un:any, pwd:any){
-        var creds = { email:un, password:pwd }; 
-        console.log(creds); 
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.http.post('/User/find', creds,{headers:headers})
+        var headers = new Headers({ 'Content-Type': 'application/json' });
+        this.http.post('/api/User/find', { email:un, password:pwd },{headers:headers})
         .map(response  => response.json())
         .subscribe(
             data => console.log(data), 
