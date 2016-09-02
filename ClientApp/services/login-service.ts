@@ -5,8 +5,8 @@ import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angul
 import { User } from '../models/user';
 
 let users:User[] = [
-    { email:'test@yahoo.com', password:'123' }, 
-    { email:'root@test.com', password:'linux' }
+    { id:1, email:'test@yahoo.com', password:'123' }, 
+    { id:2, email:'root@test.com', password:'linux' }
 ];
  
 @Injectable()
@@ -35,12 +35,13 @@ export class LoginService {
     } 
     find(un:any, pwd:any){
         var headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.post('/api/User/find', { email:un, password:pwd },{headers:headers})
+        console.log("Test History"); 
+        this.http.post('/api/User/searchHistory', { email:un, password:pwd },{headers:headers})
         .map(response  => response.json())
         .subscribe(
             data => console.log(data), 
-            err => console.log(err),
-            () => console.log("")
+            error => console.log(error),
+            () => console.log("Complete")
         );
     }
 }

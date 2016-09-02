@@ -1,22 +1,18 @@
 import { Component } from '@angular/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
+import { FORM_DIRECTIVES } from '@angular/common';
 
 import { LoginService } from '../../services/login-service';
 import { User } from '../../models/user';
 
 
 @Component({
-    selector: 'login',
+    selector: 'search-history',
     directives: [FORM_DIRECTIVES],
     providers: [LoginService],
-    template: require('./login.html')
+    template: require('./history.html')
 })
-export class Login {
+export class SearchHistory {
     constructor(private ls:LoginService){
         
-    }
-    login(email: any, pwd: any){
-        console.log("Test Login"); 
-        this.ls.find(email,pwd); 
     }
 }

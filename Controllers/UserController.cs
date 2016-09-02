@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using Microsoft.Data.Sqlite.Utilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
 using BlueWolf.Models; 
 
 namespace BlueWolf.Controllers
@@ -13,33 +14,61 @@ namespace BlueWolf.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
-        private string cs {get;set;}
-        private string table {get;set;}
-        public UserController()
+        private readonly IHostingEnvironment hostingEnvironment;
+        private string cs {get;set;}        
+        public UserController(IHostingEnvironment hostingEnvironment)
         {
-            this.cs = "Data Source=/home/andrew/Elearn.db"; 
+            this.hostingEnvironment = hostingEnvironment ; 
+            this.cs = $"Data Source={hostingEnvironment.ContentRootPath}/DB/BlueWolf.db"; 
         }
         [HttpPost("[action]")]
-        public IActionResult find([FromBody] User user){
-            var un = user.email ; 
-            string pwd = null; 
-            int count=0; 
+        public IActionResult find([FromBody] User user)
+        {
+            User result = new User();
             using(SqliteConnection con = new SqliteConnection(cs))
             {
                 con.Open();
-                string stm = $"SELECT count(*) FROM Accounts WHERE USERNAME='{un}' AND PASSWORD='{pwd}'";
-                if(pwd == null)
-                {
-                    stm = $"SELECT count(*) FROM Accounts WHERE USERNAME='{un}'";
-                }
+                string stm = $"SELECT * FROM USERS WHERE EMAIL='{user.email}' AND PASSWORD='{user.password}' LIMIT 1";
                 using (SqliteCommand cmd = new SqliteCommand(stm, con))
                 {
-                    count = Convert.ToInt32(cmd.ExecuteScalar());
+                    using (SqliteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read()) 
+                        {
+                            result = new User
+                            {
+                                id = rdr.GetInt32(0),
+                                email = rdr.GetString(1),
+                                password  = rdr.GetString(2)
+                            }; 
+                        }
+                    }                           
                 }
-
                 con.Close();   
             }
-            return Json(new { x = count, y = false}) ; 
+            return Json(result) ; 
+        }
+        public IActionResult searchHistory([FromBody] User user)
+        {
+            List<string> result = new List<string>(); 
+            List<int> test = new List<int>(); 
+            using(SqliteConnection con = new SqliteConnection(cs))
+            {
+                con.Open();
+                string stm = $"SELECT INPUT FROM HISTORY WHERE ID='{user.id}' LIMIT 100";
+                using (SqliteCommand cmd = new SqliteCommand(stm, con))
+                {
+                    using (SqliteDataReader rdr = cmd.ExecuteReader())
+                    {
+                        while (rdr.Read()) 
+                        {
+                            result.Add(rdr.GetString(0)); 
+                            test.Add(rdr.GetInt32(1)); 
+                        }
+                    }                           
+                }
+                return Json(result); 
+            }
         }
     }
 }
