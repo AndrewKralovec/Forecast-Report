@@ -1,6 +1,5 @@
 import * as ng from '@angular/core';
 import { LoginService } from '../../services/login-service';
-import { User } from '../../models/user';
 
 
 @ng.Component({
@@ -10,7 +9,6 @@ import { User } from '../../models/user';
 })
 export class Home {
     constructor(private ls:LoginService){
-        
     }
     ngOnInit(){
         this.ls.checkCredentials();

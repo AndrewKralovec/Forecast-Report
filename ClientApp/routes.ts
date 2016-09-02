@@ -5,6 +5,7 @@ import { FetchData } from './components/fetch-data/fetch-data';
 import { Counter } from './components/counter/counter';
 import { Weather } from './components/weather/weather';
 import { Chart } from './components/chart/chart';
+import { SearchHistory } from './components/history/history';
 
 
 export const routes: RouterConfig = [
@@ -15,5 +16,6 @@ export const routes: RouterConfig = [
     { path: 'fetch-data', component: FetchData },
     { path: 'weather', component: Weather },
     { path: 'chart', component: Chart },
+    { path: 'history', component: SearchHistory },
     { path: '**', redirectTo: 'home' }
 ];

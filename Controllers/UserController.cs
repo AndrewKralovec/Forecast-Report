@@ -35,11 +35,9 @@ namespace BlueWolf.Controllers
                     {
                         while (rdr.Read()) 
                         {
-                            result = new User
-                            {
+                            result = new User {
                                 id = rdr.GetInt32(0),
-                                email = rdr.GetString(1),
-                                password  = rdr.GetString(2)
+                                email = rdr.GetString(1)
                             }; 
                         }
                     }                           
@@ -48,22 +46,24 @@ namespace BlueWolf.Controllers
             }
             return Json(result) ; 
         }
-        public IActionResult searchHistory([FromBody] User user)
+        [HttpPost("[action]")]
+        public IActionResult getHistory([FromBody] User user)
         {
-            List<string> result = new List<string>(); 
-            List<int> test = new List<int>(); 
+            List<History> result = new List<History>(); 
             using(SqliteConnection con = new SqliteConnection(cs))
             {
                 con.Open();
-                string stm = $"SELECT INPUT FROM HISTORY WHERE ID='{user.id}' LIMIT 100";
+                string stm = $"SELECT INPUT,DATE  FROM HISTORY WHERE ID='{user.id}' LIMIT 100";
                 using (SqliteCommand cmd = new SqliteCommand(stm, con))
                 {
                     using (SqliteDataReader rdr = cmd.ExecuteReader())
                     {
                         while (rdr.Read()) 
                         {
-                            result.Add(rdr.GetString(0)); 
-                            test.Add(rdr.GetInt32(1)); 
+                            result.Add(new History { 
+                                input = rdr.GetString(0), 
+                                date = rdr.GetDateTime(1)  
+                            }); 
                         }
                     }                           
                 }
