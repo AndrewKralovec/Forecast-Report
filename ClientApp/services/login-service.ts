@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http'
+
 import { User } from '../models/user';
 
 let users:User[] = [
@@ -9,7 +11,7 @@ let users:User[] = [
  
 @Injectable()
 export class LoginService {
-    constructor(private router:Router){
+    constructor(private router:Router, private http:Http){
         
     }
     logout() {
@@ -31,4 +33,17 @@ export class LoginService {
             this.router.navigate(['/login']);
         }
     } 
+    find(un:any, pwd:any){
+        var creds = { email:un, password:pwd }; 
+        console.log(creds); 
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        this.http.post('/User/find', creds,{headers:headers})
+        .map(response  => response.json())
+        .subscribe(
+            data => console.log(data), 
+            err => console.log(err),
+            () => console.log("")
+        );
+    }
 }

@@ -1,6 +1,6 @@
 export class Forecast {
     currently:Object;
-    daily:Object;
+    daily:any;
     flags:Object;
     hourly:Object;
     latitude:number;

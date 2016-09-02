@@ -1,6 +1,6 @@
 import * as ng from '@angular/core';
-
-import { LoginService, User } from '../../services/login-service';
+import { LoginService } from '../../services/login-service';
+import { User } from '../../models/user';
 
 
 @ng.Component({

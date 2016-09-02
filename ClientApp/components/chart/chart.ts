@@ -5,6 +5,7 @@ import { WeatherChart } from './weather-chart';
 import { Forecast } from '../../models/forecast';
 import { Location } from '../../models/location';
 import { ForecastService } from '../../services/forecastService.ts';
+import { ChartObject } from '../../models/chart-object';
 
 interface Series {
    key:string; 
@@ -20,8 +21,8 @@ interface Series {
 export class Chart {
     // Current ForecastS
     private forecast:Forecast; 
-    private dateSet:Array<string> = ["one","two","three"]; 
-    private tempSet:Array<any>; 
+    private dateSet:ChartObject; 
+    private tempSet:Array<any> = new Array();
     // Weather series data options
     private seriesSet:Array<Series> = [
         { key:"Max Tempature", value:"temperatureMax" },
@@ -36,17 +37,31 @@ export class Chart {
         latitude:41.8093699,
         longitude:-89.8093699
     }; 
-    constructor(public fs:ForecastService){
+    constructor(private fs:ForecastService){
+        fs.getForcast(this.location.latitude,this.location.longitude)
+        .subscribe(result => {
+            this.forecast = result ;
+            this.dateSet = {
+                x : this.formatSet(result.daily.data,"time"), 
+                y : "",
+                data : []
+            }; 
+        }); 
     }
-    onChange(deviceValue) {
-        console.log("Select: "+deviceValue);
+    onChange(value) {
+        console.log("Select: "+value);
+        this.dateSet = {
+            x : this.dateSet.x, 
+            y : this.selectedSet.key,
+            data : this.formatSet(this.forecast.daily.data,value)
+        };
+        
     }
-    formatSet(block:Array<any>){
-        this.dateSet = new Array();
-        this.tempSet = new Array();
+    formatSet(block:Array<any>, prop:string){
+        let result:any = new Array();
         for (let i of block) {
-            this.tempSet.push(i.apparentTemperatureMax); 
-            this.dateSet.push(i['time']); 
+            result.push(i[prop]); 
         }
+        return result; 
     }
 }

@@ -15,7 +15,7 @@ export class Login {
     constructor(private ls:LoginService){
         
     }
-    login(email: any, password: any){
+    test(email: any, password: any){
         console.log("Test"); 
         let user:User = {
             email:email,password:password
@@ -24,5 +24,9 @@ export class Login {
         if(!this.ls.login(user)){
             alert("Failed to login");
         }
+    }
+    login(email: any, password: any){
+        console.log("Test Login"); 
+        this.ls.find(email,password); 
     }
 }
