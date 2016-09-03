@@ -62,7 +62,7 @@ namespace BlueWolf.Controllers
                         {
                             result.Add(new History { 
                                 input = rdr.GetString(0), 
-                                date = rdr.GetDateTime(1)  
+                                date = rdr.GetString(1)  
                             }); 
                         }
                     }                           
