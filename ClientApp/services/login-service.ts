@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http' 
+import { History } from '../models/history';
+
 @Injectable()
 export class LoginService {
     constructor(private router:Router, private http:Http){
@@ -33,10 +35,26 @@ export class LoginService {
         );
     }
     getHistory(){
-        var headers = new Headers({ 'Content-Type': 'application/json' });
         console.log("Test History"); 
-        console.log(JSON.parse(localStorage.getItem("user"))); 
+        var headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post('/api/User/getHistory', JSON.parse(localStorage.getItem("user")),{headers:headers})
         .map(response  => response.json()); 
+    }
+    save(input:any) {
+        console.log("Test Save"); 
+        console.log(JSON.parse(localStorage.getItem("user")).id); 
+        console.log(JSON.stringify(input)); 
+        let body = {
+            id:2, 
+            input:"", 
+            date: Date.now()
+        }; 
+        var headers = new Headers({ 'Content-Type': 'application/json' });
+        this.http.post('/api/User/saveHistory', body, {headers:headers})
+        .map(response  => response.json())
+        .subscribe(result => {
+            console.log(result);
+        }); 
+
     }
 }

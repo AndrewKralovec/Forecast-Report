@@ -70,5 +70,34 @@ namespace BlueWolf.Controllers
                 return Json(result); 
             }
         }
+        [HttpPost("[action]")]
+        public IActionResult saveHistory([FromBody] History history)
+        {
+            using(SqliteConnection con = new SqliteConnection(cs))
+            {
+                try
+                {
+                    con.Open();
+                    using (SqliteCommand cmd = new SqliteCommand())
+                    {
+                        cmd.Connection = con ;
+                        cmd.CommandText = "INSERT INTO HISTORY(ID, INPUT, DATE) VALUES(@id, @input, @date)";
+                        cmd.Prepare();
+                        
+                        cmd.Parameters.AddWithValue("@id", history.id);
+                        cmd.Parameters.AddWithValue("@input", history.input);
+                        cmd.Parameters.AddWithValue("@date", history.date);
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    con.Close();   
+                    return Json("Success");
+                }
+                catch (SqliteException ex)
+                {
+                    return Json(ex) ; 
+                }
+            }
+        }
     }
 }

@@ -4,12 +4,13 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Forecast } from '../../models/forecast';
 import { Location } from '../../models/location';
 import { ForecastService } from '../../services/forecastService.ts';
+import { LoginService } from '../../services/login-service';
 
 
 @Component({
     selector: 'weather',
     directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
-    providers: [ForecastService], 
+    providers: [ForecastService, LoginService], 
     template: require('./weather.html')
 })
 export class Weather {
@@ -22,7 +23,7 @@ export class Weather {
         latitude:41.8093699,
         longitude:-89.8093699
     }; 
-    constructor(public fs:ForecastService){
+    constructor(private fs:ForecastService, private ls: LoginService){
         fs.getForcast(this.location)
         .subscribe(result => {
             this.forecast = result ;
@@ -42,6 +43,7 @@ export class Weather {
             this.forecast = result ;
             console.log(this.forecast);
         });
+        this.ls.save(this.location); 
     }
     searchAddress(){
         this.fs.getGeocode(this.address)
