@@ -15,26 +15,52 @@ import { ForecastService } from '../../services/forecastService.ts';
 export class Weather {
     // Current ForecastS
     public forecast:Forecast; 
+    public address:string; 
+    public datetime:string; 
     // Default location coordniates 
     public location:Location = {
         latitude:41.8093699,
         longitude:-89.8093699
     }; 
     constructor(public fs:ForecastService){
-        fs.getForcast(this.location.latitude,this.location.longitude)
+        fs.getForcast(this.location)
         .subscribe(result => {
             this.forecast = result ;
             console.log(this.forecast);
         }); 
     }
-    search(latitude: any, longitude: any){
-        this.fs.getForcast(latitude,longitude)
-            .subscribe(result => {
-                this.forecast = result ;
-                console.log(this.forecast);
-            });
+    search(lat: any, lng: any){
+        console.log("search"); 
+        console.log(this.datetime); 
+        this.location = {
+            latitude:lat, 
+            longitude:lng,
+            date:this.unixFormat(this.datetime)
+        }; 
+        this.fs.getForcast(this.location)
+        .subscribe(result => {
+            this.forecast = result ;
+            console.log(this.forecast);
+        });
+    }
+    searchAddress(){
+        this.fs.getGeocode(this.address)
+        .subscribe(result => {
+            if(result.results[0] !== null ){
+                this.search(result.results[0].geometry.location.lat, result.results[0].geometry.location.lng); 
+            }else{
+                alert("Could not find Address Please try again");
+            }
+         });
     }
     dateFormat(unix:number){
         return new Date(unix * 1000); 
+    }
+    unixFormat(date:string){
+        if(date == null || date == undefined){
+            return null; 
+        }
+        date = date.substring(0, date.indexOf('T'));
+        return Math.round(new Date(date).getTime()/1000); 
     }
 }
