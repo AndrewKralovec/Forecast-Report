@@ -21,8 +21,12 @@ namespace BlueWolf.Controllers
             AppConfigs = appkeys.Value;
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> CurrentForecasts(string location)
+        public async Task<IActionResult> CurrentForecasts(Location location)
         {
+            string result = null ; 
+            if(location.date != null){
+                result = $",{location.date}";
+            }
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://api.forecast.io/");
@@ -30,35 +34,11 @@ namespace BlueWolf.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 // HTTP GET
-                HttpResponseMessage response = await client.GetAsync("forecast/6032920e453a7d19ea39cf5f0c03c120/"+location);
+                HttpResponseMessage response = await client.GetAsync($"forecast/6032920e453a7d19ea39cf5f0c03c120/{location.toString()}{result}");
                 if (response.IsSuccessStatusCode)
                 {
                     var forecast = await response.Content.ReadAsStringAsync();
                     return Content(forecast, "application/json");
-                }
-                else
-                {
-                    throw new HttpRequestException("Bad request"); 
-                }
-                
-            }
-        }
-        [HttpGet("[action]")]
-        public async Task<IActionResult> getLong()
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/geocode/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                // HTTP GET
-                HttpResponseMessage response = await client.GetAsync("json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyCcniZbdifq4_mcXynT4tPuVkGIXRhvikI");
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
-                    var car = result ; 
-                    return Content(result, "application/json");
                 }
                 else
                 {

@@ -5,7 +5,8 @@ namespace BlueWolf.Models
 {
     public class History
     {
+        public int id { get; set; }
         public string input { get; set; }
-        public DateTime date { get; set; }
+        public string date { get; set; }
     }
 }
