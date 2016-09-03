@@ -21,11 +21,11 @@ namespace BlueWolf.Controllers
             AppConfigs = appkeys.Value;
         }
         [HttpPost("[action]")]
-        public async Task<IActionResult> CurrentForecasts(Location location)
+        public async Task<IActionResult> CurrentForecasts([FromBody] Location location)
         {
-            string result = null ; 
+            string date = null ; 
             if(location.date != null){
-                result = $",{location.date}";
+                date = $",{location.date}";
             }
             using (var client = new HttpClient())
             {
@@ -34,7 +34,7 @@ namespace BlueWolf.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 // HTTP GET
-                HttpResponseMessage response = await client.GetAsync($"forecast/6032920e453a7d19ea39cf5f0c03c120/{location.toString()}{result}");
+                HttpResponseMessage response = await client.GetAsync($"forecast/6032920e453a7d19ea39cf5f0c03c120/{location.toString()}{date}");
                 if (response.IsSuccessStatusCode)
                 {
                     var forecast = await response.Content.ReadAsStringAsync();
