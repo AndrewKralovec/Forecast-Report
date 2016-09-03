@@ -19,12 +19,8 @@ export class ForecastService {
         .map(response  => response.json());
     }
     getGeocode(address:string){
-        this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
-        .map(response  => response.json())
-        .subscribe(result => {
-                console.log(result);
-                console.log(result.results[0].geometry.location);
-        });
+        return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
+        .map(response  => response.json());
     }
  
 }
