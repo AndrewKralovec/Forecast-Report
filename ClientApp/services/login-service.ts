@@ -42,11 +42,9 @@ export class LoginService {
     }
     save(input:any) {
         console.log("Test Save"); 
-        console.log(JSON.parse(localStorage.getItem("user")).id); 
-        console.log(JSON.stringify(input)); 
         let body = {
-            id:2, 
-            input:"", 
+            id:JSON.parse(localStorage.getItem("user")).id, 
+            input:`${input.latitude},${input.longitude}`, 
             date: Date.now()
         }; 
         var headers = new Headers({ 'Content-Type': 'application/json' });
