@@ -1,4 +1,5 @@
-export class History {
+export interface History {
+    id?:number; 
     input: string; 
     date:string; 
 }

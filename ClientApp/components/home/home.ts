@@ -12,7 +12,6 @@ export class Home {
     constructor(private ls:LoginService, private fs:ForecastService){
     }
     test(){
-        this.fs.getGeocode(); 
     }
     ngOnInit(){
         this.ls.checkCredentials();

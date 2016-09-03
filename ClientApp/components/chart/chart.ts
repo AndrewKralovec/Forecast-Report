@@ -38,7 +38,7 @@ export class Chart {
         longitude:-89.8093699
     }; 
     constructor(private fs:ForecastService){
-        fs.getForcast(this.location.latitude,this.location.longitude)
+        fs.getForcast(this.location)
         .subscribe(result => {
             this.forecast = result ;
             this.dateSet = {
