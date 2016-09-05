@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
-
-import { LoginService } from '../../services/login-service';
+import { LoginService } from '../../services/login.service';
 import { User } from '../../models/user';
-
 
 @Component({
     selector: 'login',

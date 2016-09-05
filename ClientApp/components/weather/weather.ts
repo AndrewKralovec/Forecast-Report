@@ -31,7 +31,6 @@ export class Weather {
         }); 
     }
     search(lat: any, lng: any){
-        console.log("search"); 
         console.log(this.datetime); 
         this.location = {
             latitude:lat, 
@@ -48,11 +47,10 @@ export class Weather {
     searchAddress(){
         this.fs.getGeocode(this.address)
         .subscribe(result => {
-            if(result.results[0] !== null ){
+            if(result.results[0] !== null )
                 this.search(result.results[0].geometry.location.lat, result.results[0].geometry.location.lng); 
-            }else{
+            else
                 alert("Could not find Address Please try again");
-            }
          });
     }
     dateFormat(unix:number){

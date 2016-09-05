@@ -4,16 +4,8 @@ import { CHART_DIRECTIVES } from 'angular2-highcharts';
 @Component({
     selector: 'weather-chart',
     directives: [CHART_DIRECTIVES],
-    template: `<div *ngIf="myData">
-                <chart [options]="options"
-                    (load)="saveInstance($event.context)">
-                </chart>
-               </div>`, 
-    styles: [`
-      chart {
-        display: block;
-      }
-    `]
+    styles: [`chart {display: block;}`],
+    template: require('./weather-chart.html')
 })
 export class WeatherChart  {
     @Input() myData: any;
@@ -24,11 +16,6 @@ export class WeatherChart  {
         console.log("Data "+this.myData);
         this.options = {
             title : { text : 'Weather chart' },
-            yAxis: {
-                title: {
-                    text: 'Tempature '
-                }
-            },
             xAxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             },
@@ -41,13 +28,12 @@ export class WeatherChart  {
         this.chart = chartInstance;
     }
     ngOnChanges(){
-        if(this.chart !== undefined){
+        if(this.chart !== undefined)
             this.Refresh(); 
-        }
     }
     Refresh(){
+        console.log(this.myData.y); 
         this.chart.xAxis[0].setCategories(this.myData.x ); 
-        this.chart.yAxis[0].setTitle({ text: this.myData.y }); 
         this.chart.series[0].setData(this.myData.data); 
     }
 }

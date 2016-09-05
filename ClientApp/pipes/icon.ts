@@ -5,8 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class Icon {
     transform(value: string) : any {
-        let src:string='' ; 
-        console.log(value);
+        let src:string; 
         switch (value) {
             case "clear-day":
                 src = "sun.gif";

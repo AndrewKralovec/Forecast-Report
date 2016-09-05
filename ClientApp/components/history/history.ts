@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FORM_DIRECTIVES } from '@angular/common';
-
-import { LoginService } from '../../services/login-service';
-import { ForecastService } from '../../services/forecastService';
+import { LoginService } from '../../services/login.service';
+import { ForecastService } from '../../services/forecast.service';
 import { History } from '../../models/history';
 
 @Component({
