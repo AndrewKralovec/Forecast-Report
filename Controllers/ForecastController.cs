@@ -34,7 +34,7 @@ namespace BlueWolf.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 // HTTP GET
-                HttpResponseMessage response = await client.GetAsync($"forecast/6032920e453a7d19ea39cf5f0c03c120/{location.toString()}{date}");
+                HttpResponseMessage response = await client.GetAsync($"forecast/{AppConfigs.ForecastAPIKey}/{location.toString()}{date}");
                 if (response.IsSuccessStatusCode)
                 {
                     var forecast = await response.Content.ReadAsStringAsync();
