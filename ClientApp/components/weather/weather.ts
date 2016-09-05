@@ -15,11 +15,11 @@ import { Icon } from '../../pipes/icon';
 })
 export class Weather {
     // Current ForecastS
-    public forecast:Forecast; 
-    public address:string; 
-    public datetime:string; 
+    private forecast:Forecast; 
+    private address:string; 
+    private datetime:string; 
     // Default location coordniates 
-    public location:Location = {
+    private location:Location = {
         latitude:41.8093699,
         longitude:-89.8093699
     }; 
@@ -31,18 +31,21 @@ export class Weather {
         }); 
     }
     search(lat: any, lng: any){
-        console.log(this.datetime); 
-        this.location = {
-            latitude:lat, 
-            longitude:lng,
-            date:this.unixFormat(this.datetime)
-        }; 
-        this.fs.getForcast(this.location)
-        .subscribe(result => {
-            this.forecast = result ;
-            console.log(this.forecast);
-        });
-        this.ls.save(this.location); 
+        if(parseFloat(lat) && parseFloat(lng)){
+            this.location = {
+                latitude:lat, 
+                longitude:lng,
+                date:this.unixFormat(this.datetime)
+            }; 
+            this.fs.getForcast(this.location)
+            .subscribe(result => {
+                this.forecast = result ;
+                console.log(this.forecast);
+            });
+            this.ls.save(this.location); 
+        }else{
+            alert("Invalid latitude and longitude"); 
+        }
     }
     searchAddress(){
         this.fs.getGeocode(this.address)

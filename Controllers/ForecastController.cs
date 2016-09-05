@@ -41,10 +41,7 @@ namespace BlueWolf.Controllers
                     return Content(forecast, "application/json");
                 }
                 else
-                {
-                    throw new HttpRequestException("Bad request"); 
-                }
-                
+                    return BadRequest("Bad request");                 
             }
         }
     }

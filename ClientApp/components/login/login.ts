@@ -13,7 +13,7 @@ export class Login {
     constructor(private ls:LoginService){
         
     }
-    login(email: any, pwd: any){
-        this.ls.find(email,pwd); 
+    login(email: any, password: any){
+        this.ls.find(email,password); 
     }
 }

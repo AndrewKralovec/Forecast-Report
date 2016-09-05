@@ -5,54 +5,53 @@ import { History } from '../models/history';
 
 @Injectable()
 export class LoginService {
+    private loggedIn:boolean = false; 
     constructor(private router:Router, private http:Http){
         
     }
     logout() {
-        console.log("Log out"); 
         localStorage.removeItem("user");
         this.router.navigate(['/login']);
     }
     login(user){
-        console.log(user);
         localStorage.setItem("user", JSON.stringify(user));
+        this.loggedIn = true; 
         this.router.navigate(['/home']);      
     }
     checkCredentials(){
-        if (localStorage.getItem("user") === null){
+        if (localStorage.getItem("user") === null)
             this.router.navigate(['/login']);
-        }
     } 
-    find(un:any, pwd:any){
-        var headers = new Headers({ 'Content-Type': 'application/json' });
-        console.log("Test Login"); 
-        this.http.post('/api/User/find', { email:un, password:pwd },{headers:headers})
+    find(email:any, password:any){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        this.http.post('/api/User/find', { email:email, password:password },{headers:headers})
         .map(response  => response.json())
         .subscribe(
             data => this.login(data), 
-            error => console.log(error),
+            error => this.error(error),
             () => console.log("Complete")
         );
     }
     getHistory(){
-        console.log("Test History"); 
-        var headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post('/api/User/getHistory', JSON.parse(localStorage.getItem("user")),{headers:headers})
         .map(response  => response.json()); 
     }
     save(input:any) {
-        console.log("Test Save"); 
         let body = {
             id:JSON.parse(localStorage.getItem("user")).id, 
             input:`${input.latitude},${input.longitude}`, 
             date: Date.now()
         }; 
-        var headers = new Headers({ 'Content-Type': 'application/json' });
+        let headers = new Headers({ 'Content-Type': 'application/json' });
         this.http.post('/api/User/saveHistory', body, {headers:headers})
         .map(response  => response.json())
         .subscribe(result => {
             console.log(result);
         }); 
-
+    }
+    error(error){
+        console.log(error); 
+        alert("The user could not be found, please try again"); 
     }
 }

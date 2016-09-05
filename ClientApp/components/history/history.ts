@@ -11,7 +11,7 @@ import { History } from '../../models/history';
     template: require('./history.html')
 })
 export class SearchHistory {
-    searchs:Array<History> = new Array<History>(); 
+    searchs:Array<History> = new Array<History>();
     constructor(private ls:LoginService,private fs:ForecastService){
         ls.getHistory()
         .subscribe(result => {
@@ -19,11 +19,9 @@ export class SearchHistory {
             console.log(this.searchs);
         }); 
     }
-    formatAdress(address:string){
-        this.fs.getAddress(address)
-        .subscribe(result => {
-            console.log(address);
-            return result.results[0].formatted_address; 
-        });
+    ngOnInit(){
+        //get the formatted address for every user
+        this.searchs.forEach(s => s.address = this.fs.getAddress(s.input));
     }
 }
+

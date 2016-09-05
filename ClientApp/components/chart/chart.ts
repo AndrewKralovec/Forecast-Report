@@ -43,12 +43,10 @@ export class Chart {
         }); 
     }
     onChange(value) {
-        console.log("Select: "+value);
         this.dateSet = {
             x : this.dateSet.x, 
             data : this.formatSet(this.forecast.daily.data,value)
         };
-        
     }
     formatSet(block:Array<any>, prop:string){
         let result:any = new Array();

@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let search of searchs" >
-                    <td>{{search.input}}</td>
+                    <td>{{search.address | async}}</td>
                     <td>{{search.date  | date:'longDate'}}</td>
                 </tr>
             </tbody>

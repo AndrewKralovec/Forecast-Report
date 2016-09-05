@@ -17,7 +17,7 @@ export class WeatherChart  {
         this.options = {
             title : { text : 'Weather chart' },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: []
             },
             series: [{
                 data: [],
