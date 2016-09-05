@@ -43,6 +43,8 @@ export class Chart {
         }); 
     }
     onChange(value) {
+        console.log("Test"); 
+        console.log(this.selectedSet); 
         this.dateSet = {
             x : this.dateSet.x, 
             data : this.formatSet(this.forecast.daily.data,value)

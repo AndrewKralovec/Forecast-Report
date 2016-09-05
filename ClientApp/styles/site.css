@@ -60,9 +60,20 @@
     }
 }
 
-.cloud-header{
+.cloud-header {
     font-size: 75px;
 }
-.cloud-body{
+
+.cloud-body {
     font-size: 50px;
+}
+
+.weather-icon {
+    width:128px;
+    height:128px;
+}
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+  background-color: #4189C7;
+  color:#eeeeee;
 }

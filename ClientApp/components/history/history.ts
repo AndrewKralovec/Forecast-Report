@@ -16,12 +16,12 @@ export class SearchHistory {
         ls.getHistory()
         .subscribe(result => {
             this.searchs = result ;
-            console.log(this.searchs);
+            this.searchs.forEach(s =>{
+                this.fs.getAddress(s.input).subscribe(response =>{
+                    s.address = response.results[0].formatted_address; 
+                });
+            }); 
         }); 
-    }
-    ngOnInit(){
-        //get the formatted address for every user
-        this.searchs.forEach(s => s.address = this.fs.getAddress(s.input));
     }
 }
 

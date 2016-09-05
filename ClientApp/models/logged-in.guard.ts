@@ -7,6 +7,6 @@ export class LoggedInGuard implements CanActivate {
   constructor(private ls: LoginService) {}
 
   canActivate() {
-    return this.user.isLoggedIn();
+    return this.ls.isLoggedIn();
   }
 }

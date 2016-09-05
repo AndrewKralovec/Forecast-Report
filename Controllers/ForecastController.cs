@@ -26,7 +26,6 @@ namespace BlueWolf.Controllers
             string date = null ; 
             if(location.date != null)
                 date = $",{location.date}";
-                
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(forecastUrl);

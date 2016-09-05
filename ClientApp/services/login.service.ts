@@ -18,6 +18,11 @@ export class LoginService {
         this.loggedIn = true; 
         this.router.navigate(['/home']);      
     }
+    isLoggedIn(){
+        if(localStorage.getItem("user") === null)
+            return false;
+        return true;  
+    }
     checkCredentials(){
         if (localStorage.getItem("user") === null)
             this.router.navigate(['/login']);
