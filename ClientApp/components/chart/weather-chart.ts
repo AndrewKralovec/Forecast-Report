@@ -16,6 +16,11 @@ export class WeatherChart  {
         console.log("Data "+this.myData);
         this.options = {
             title : { text : 'Weather chart' },
+            yAxis: {
+                title: {
+                    text: 'Empty '
+                }
+            },
             xAxis: {
                 categories: []
             },
@@ -33,7 +38,8 @@ export class WeatherChart  {
     }
     Refresh(){
         console.log(this.myData.y); 
-        this.chart.xAxis[0].setCategories(this.myData.x ); 
+        this.chart.xAxis[0].setCategories(this.myData.x); 
+        this.chart.yAxis[0].setTitle({ text: this.myData.y }); 
         this.chart.series[0].setData(this.myData.data); 
     }
 }

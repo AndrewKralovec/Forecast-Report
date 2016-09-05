@@ -50,10 +50,10 @@ export class Weather {
     searchAddress(){
         this.fs.getGeocode(this.address)
         .subscribe(result => {
-            if(result.results[0] !== null )
+            if(result.results[0] !== undefined)
                 this.search(result.results[0].geometry.location.lat, result.results[0].geometry.location.lng); 
             else
-                alert("Could not find Address Please try again");
+                alert(`Could not find Address ${this.address} Please try again`);
          });
     }
     dateFormat(unix:number){

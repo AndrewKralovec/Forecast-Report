@@ -26,7 +26,7 @@ export class Chart {
         { key:"Humidity", value:"humidity" },
         { key:"Wind Speed", value:"windSpeed" },
     ]; 
-    private selectedSet:Series = this.seriesSet[0]; 
+    private selectedSet:any = this.seriesSet[0]; 
     // Default location coordniates 
     private location:Location = {
         latitude:41.8093699,
@@ -38,16 +38,16 @@ export class Chart {
             this.forecast = result ;
             this.dateSet = {
                 x : this.timeSet(result.daily.data), 
+                y:"Empty", 
                 data : []
             }; 
         }); 
     }
     onChange(value) {
-        console.log("Test"); 
-        console.log(this.selectedSet); 
         this.dateSet = {
             x : this.dateSet.x, 
-            data : this.formatSet(this.forecast.daily.data,value)
+            y : value.key,
+            data : this.formatSet(this.forecast.daily.data,value.value)
         };
     }
     formatSet(block:Array<any>, prop:string){
