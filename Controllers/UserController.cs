@@ -15,11 +15,11 @@ namespace BlueWolf.Controllers
     public class UserController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;
-        private string cs {get;set;}        
+        private readonly string cs ;         
         public UserController(IHostingEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment ; 
-            this.cs = $"Data Source={hostingEnvironment.ContentRootPath}/DB/BlueWolf.db"; 
+            cs = $"Data Source={hostingEnvironment.ContentRootPath}/DB/BlueWolf.db"; 
         }
         [HttpPost("[action]")]
         public IActionResult find([FromBody] User user)

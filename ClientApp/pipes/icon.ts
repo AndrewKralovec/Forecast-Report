@@ -5,23 +5,34 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class Icon {
     transform(value: string) : any {
+        let src:string='' ; 
+        console.log(value);
         switch (value) {
             case "clear-day":
-                return "sun.gif";
+                src = "sun.gif";
+                break;
             case "clear-night":
-                return  "night.gif";
+                src = "night.gif";
+                break;
             case "rain":
-                return "rain.gif";
+                src = "rain.gif";
+                break;
             case "wind":
-                return "wind.gif";
+                src = "wind.gif";
+                break;
             case "snow":
-                return  "snow.gif";
+                src =  "snow.gif";
+                break;
             case "partly-cloudy-day":
-                return  "cloudy-day.gif";
+                src =  "cloudy-day.gif";
+                break;
             case "partly-cloudy-night":
-                return  "cloudy-day.gif";
+                src =  "cloudy-day.gif";
+                break;
             default: 
-                return "cloud.gif";
+                src = "cloud.gif";
+                break;
         }
+        return `http://localhost:5000/images/${src}`; 
     }
 }

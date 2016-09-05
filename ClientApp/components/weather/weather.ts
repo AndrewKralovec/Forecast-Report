@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
-
 import { Forecast } from '../../models/forecast';
 import { Location } from '../../models/location';
-import { ForecastService } from '../../services/forecastService.ts';
-import { LoginService } from '../../services/login-service';
+import { ForecastService } from '../../services/forecast.service.ts';
+import { LoginService } from '../../services/login.service';
 import { Icon } from '../../pipes/icon';
-
 
 @Component({
     selector: 'weather',
