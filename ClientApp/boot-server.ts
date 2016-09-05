@@ -25,8 +25,6 @@ export default function (params: any): Promise<{ html: string, globals?: any }> 
             provideRouter(routes),
             ngUniversal.NODE_LOCATION_PROVIDERS,
         ],
-        // TODO: Render just the <app> component instead of wrapping it inside an extra HTML document
-        // Waiting on https://github.com/angular/universal/issues/347
         template: '<!DOCTYPE html>\n<html><head></head><body><app></app></body></html>'
     };
 
