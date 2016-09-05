@@ -14,22 +14,22 @@ namespace BlueWolf.Controllers
     public class SampleDataController : Controller
     {
         public AppKeyConfig AppConfigs { get; }
-        private readonly IHostingEnvironment hostingEnvironment;
-        private string cs {get;set;}   
+        private readonly string forecastUrl ;
         public SampleDataController(IOptions<AppKeyConfig> appkeys)
         {
             AppConfigs = appkeys.Value;
+            forecastUrl = "https://api.forecast.io/"; 
         }
         [HttpPost("[action]")]
         public async Task<IActionResult> CurrentForecasts([FromBody] Location location)
         {
             string date = null ; 
-            if(location.date != null){
+            if(location.date != null)
                 date = $",{location.date}";
-            }
+                
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://api.forecast.io/");
+                client.BaseAddress = new Uri(forecastUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

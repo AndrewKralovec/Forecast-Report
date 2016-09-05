@@ -53,7 +53,7 @@ namespace BlueWolf.Controllers
             using(SqliteConnection con = new SqliteConnection(cs))
             {
                 con.Open();
-                string stm = $"SELECT INPUT,DATE  FROM HISTORY WHERE ID='{user.id}' LIMIT 100";
+                string stm = $"SELECT INPUT,DATE  FROM HISTORY WHERE ID='{user.id}' ORDER BY DATE DESC LIMIT 100";
                 using (SqliteCommand cmd = new SqliteCommand(stm, con))
                 {
                     using (SqliteDataReader rdr = cmd.ExecuteReader())
@@ -89,7 +89,6 @@ namespace BlueWolf.Controllers
                         cmd.Parameters.AddWithValue("@date", history.date);
                         cmd.ExecuteNonQuery();
                     }
-
                     con.Close();   
                     return Json("Success");
                 }

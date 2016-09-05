@@ -12,8 +12,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let search of searchs" >
-                    <td>{{search.input}}</td>
-                    <td>{{search.date | date:'medium' }}</td>
+                    <td>{{formatAdress(search.input)}}</td>
+                    <td>{{search.date  | date:'longDate'}}</td>
                 </tr>
             </tbody>
         </table>  

@@ -22,5 +22,12 @@ export class ForecastService {
         return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
         .map(response  => response.json());
     }
+    getAddress(address:string){
+        return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?address='+address)
+        .map(response  => response.json());
+    }
+    getDay(){
+        
+    }
  
 }

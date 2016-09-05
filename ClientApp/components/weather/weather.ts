@@ -5,12 +5,14 @@ import { Forecast } from '../../models/forecast';
 import { Location } from '../../models/location';
 import { ForecastService } from '../../services/forecastService.ts';
 import { LoginService } from '../../services/login-service';
+import { Icon } from '../../pipes/icon';
 
 
 @Component({
     selector: 'weather',
-    directives: [ CORE_DIRECTIVES, FORM_DIRECTIVES ],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
     providers: [ForecastService, LoginService], 
+    pipes:[Icon],
     template: require('./weather.html')
 })
 export class Weather {
@@ -59,9 +61,8 @@ export class Weather {
         return new Date(unix * 1000); 
     }
     unixFormat(date:string){
-        if(date == null || date == undefined){
+        if(date == null || date == undefined)
             return null; 
-        }
         date = date.substring(0, date.indexOf('T'));
         return Math.round(new Date(date).getTime()/1000); 
     }

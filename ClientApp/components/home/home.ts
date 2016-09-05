@@ -12,6 +12,10 @@ export class Home {
     constructor(private ls:LoginService, private fs:ForecastService){
     }
     test(){
+        this.fs.getAddress("41.8093699,-87.8729122	")
+        .subscribe(result => {
+            console.log(result.results[0].formatted_address); 
+        });
     }
     ngOnInit(){
         this.ls.checkCredentials();
