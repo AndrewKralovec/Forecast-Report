@@ -9,7 +9,7 @@ import { LoggedInGuard } from './models/logged-in.guard.ts';
 export const routes: RouterConfig = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'login', component: Login },
-    { path: 'home', component: Home, canActivate: [LoggedInGuard] },
+    { path: 'home', component: Home },
     { path: 'weather', component: Weather, canActivate: [LoggedInGuard] },
     { path: 'chart', component: Chart, canActivate: [LoggedInGuard] },
     { path: 'history', component: SearchHistory, canActivate: [LoggedInGuard] },

@@ -15,11 +15,13 @@ namespace BlueWolf.Controllers
     {
         public AppKeyConfig AppConfigs { get; }
         private readonly string forecastUrl ;
+        // Load forecast api key 
         public ForecastController(IOptions<AppKeyConfig> appkeys)
         {
             AppConfigs = appkeys.Value;
             forecastUrl = "https://api.forecast.io/"; 
         }
+        // Get Forecast information from forecast.io 
         [HttpPost("[action]")]
         public async Task<IActionResult> CurrentForecasts([FromBody] Location location)
         {

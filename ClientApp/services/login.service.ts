@@ -9,8 +9,10 @@ export class LoginService {
     }
     // Remove user from storage
     logout() {
-        localStorage.removeItem("user");
-        this.router.navigate(['/login']);
+        if(this.isLoggedIn){
+            localStorage.removeItem("user");
+            this.router.navigate(['/login']);
+        }
     }
     // Add user to storage
     login(user){
@@ -19,7 +21,7 @@ export class LoginService {
     }
     // Check if user is logged in
     isLoggedIn(){
-        if(localStorage.getItem("user") === null)
+        if(localStorage.getItem("user") == null || localStorage.getItem("user") == undefined )
             return false;
         return true;  
     }
