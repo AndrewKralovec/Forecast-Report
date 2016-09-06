@@ -74,8 +74,8 @@
   "scripts": {
     "prepublish": [
       "which npm && npm install",
-      "node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js",
-      "node node_modules/webpack/bin/webpack.js"
+      "which node && node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js",
+      "which node && node node_modules/webpack/bin/webpack.js"
     ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
   },
