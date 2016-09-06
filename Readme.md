@@ -18,6 +18,6 @@ npm install
 dotnet run 
 
 # Deploy this website on Heroku 
-<a href="https://dashboard.heroku.com/new?template=https://github.com/AndrewKralovec/Forecast-Report">
+<a href="https://dashboard.heroku.com/new?template=https://github.com/ORuban/Forecast-Report.git">
   <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
 </a>
