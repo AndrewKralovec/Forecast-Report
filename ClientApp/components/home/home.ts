@@ -11,7 +11,6 @@ export class Home {
     constructor(private router:Router, private ls: LoginService){
     }
     ngOnInit(){
-        console.log(this.ls.isLoggedIn()); 
         if(!this.ls.isLoggedIn())
             this.router.navigate(['/login']);
     }
