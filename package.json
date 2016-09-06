@@ -1,6 +1,7 @@
 {
   "name": "BlueWolf",
-  "version": "0.0.0",
+  "author": "Andrew Kralovec",
+  "version": "1.0.0",
   "devDependencies": {
     "aspnet-webpack": "^1.0.6",
     "bootstrap": "^3.3.6",

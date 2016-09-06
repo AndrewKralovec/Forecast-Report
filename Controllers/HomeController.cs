@@ -8,6 +8,7 @@ namespace BlueWolf.Controllers
 {
     public class HomeController : Controller
     {
+        // Load the index 
         public IActionResult Index()
         {
             return View();

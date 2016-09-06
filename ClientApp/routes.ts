@@ -8,10 +8,10 @@ import { LoggedInGuard } from './models/logged-in.guard.ts';
 
 export const routes: RouterConfig = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: Home, canActivate: [LoggedInGuard] },
     { path: 'login', component: Login },
-    { path: 'weather', component: Weather },
-    { path: 'chart', component: Chart },
-    { path: 'history', component: SearchHistory },
+    { path: 'home', component: Home, canActivate: [LoggedInGuard] },
+    { path: 'weather', component: Weather, canActivate: [LoggedInGuard] },
+    { path: 'chart', component: Chart, canActivate: [LoggedInGuard] },
+    { path: 'history', component: SearchHistory, canActivate: [LoggedInGuard] },
     { path: '**', redirectTo: 'home' }
 ];

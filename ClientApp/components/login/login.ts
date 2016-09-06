@@ -11,8 +11,8 @@ import { User } from '../../models/user';
 })
 export class Login {
     constructor(private ls:LoginService){
-        
     }
+    // Login in user
     login(email: any, password: any){
         this.ls.find(email,password); 
     }

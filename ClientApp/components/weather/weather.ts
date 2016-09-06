@@ -23,6 +23,7 @@ export class Weather {
         latitude:41.8093699,
         longitude:-89.8093699
     }; 
+    // Load in a default location 
     constructor(private fs:ForecastService, private ls: LoginService){
         fs.getForcast(this.location)
         .subscribe(result => {
@@ -30,11 +31,12 @@ export class Weather {
             console.log(this.forecast);
         }); 
     }
-    search(lat: any, lng: any){
-        if(parseFloat(lat) && parseFloat(lng)){
+    // Get Forecast information given entered lat/lng, if valid
+    search(latitude: any, longitude: any){
+        if(parseFloat(latitude) && parseFloat(longitude)){
             this.location = {
-                latitude:lat, 
-                longitude:lng,
+                latitude:latitude, 
+                longitude:longitude,
                 date:this.unixFormat(this.datetime)
             }; 
             this.fs.getForcast(this.location)
@@ -47,6 +49,7 @@ export class Weather {
             alert("Invalid latitude and longitude"); 
         }
     }
+    // Get Forecast information given entered address, if valid
     searchAddress(){
         this.fs.getGeocode(this.address)
         .subscribe(result => {
@@ -56,9 +59,11 @@ export class Weather {
                 alert(`Could not find Address ${this.address} Please try again`);
          });
     }
+    // Convert from unix time 
     dateFormat(unix:number){
         return new Date(unix * 1000); 
     }
+    // Convert to unix time 
     unixFormat(date:string){
         if(date == null || date == undefined)
             return null; 

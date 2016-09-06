@@ -8,12 +8,4 @@ import { ForecastService } from '../../services/forecast.service';
   template: require('./home.html')
 })
 export class Home {
-    constructor(private ls:LoginService){
-    }
-    ngOnInit(){
-        this.ls.checkCredentials();
-    }
-    logout() {
-        this.ls.logout();
-    }
 }

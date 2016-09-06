@@ -12,12 +12,13 @@ import { History } from '../../models/history';
 })
 export class SearchHistory {
     searchs:Array<History> = new Array<History>();
+    // Load last 100 searches from server 
     constructor(private ls:LoginService,private fs:ForecastService){
         ls.getHistory()
         .subscribe(result => {
             this.searchs = result ;
             this.searchs.forEach(s =>{
-                this.fs.getAddress(s.input).subscribe(response =>{
+                this.fs.getGeocode(s.input).subscribe(response =>{
                     s.address = response.results[0].formatted_address; 
                 });
             }); 

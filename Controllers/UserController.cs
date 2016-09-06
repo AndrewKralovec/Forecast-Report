@@ -16,12 +16,14 @@ namespace BlueWolf.Controllers
     public class UserController : Controller
     {
         private readonly IHostingEnvironment hostingEnvironment;
-        private readonly string cs ;         
+        private readonly string cs ; 
+        // Set up the hostingEnvironment and connection string paths     
         public UserController(IHostingEnvironment hostingEnvironment)
         {
             this.hostingEnvironment = hostingEnvironment ; 
             cs = $"Data Source={hostingEnvironment.ContentRootPath}/DB/BlueWolf.db"; 
         }
+        // Search the database for the uesr, if exists 
         [HttpPost("[action]")]
         public IActionResult find([FromBody] User user)
         {
@@ -47,6 +49,7 @@ namespace BlueWolf.Controllers
             }
             return Json(result) ; 
         }
+        // Get last 100 search history results of the given user from the  database 
         [HttpPost("[action]")]
         public IActionResult getHistory([FromBody] User user)
         {
@@ -73,6 +76,7 @@ namespace BlueWolf.Controllers
                 return BadRequest("User not found");                 
             }
         }
+        // Insert search history in the database
         [HttpPost("[action]")]
         public IActionResult saveHistory([FromBody] History history)
         {
@@ -97,7 +101,7 @@ namespace BlueWolf.Controllers
                 }
                 catch (SqliteException ex)
                 {
-                    return Json(ex) ; 
+                    return BadRequest(ex); 
                 }
             }
         }

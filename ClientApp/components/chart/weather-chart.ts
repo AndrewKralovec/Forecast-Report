@@ -8,17 +8,17 @@ import { CHART_DIRECTIVES } from 'angular2-highcharts';
     template: require('./weather-chart.html')
 })
 export class WeatherChart  {
+    // Parent chart data 
     @Input() myData: any;
     private chart : HighchartsChartObject;
     private options: HighchartsOptions;
-       ngOnInit() {
-        console.log("New init");
-        console.log("Data "+this.myData);
+    // Load in initial chart options
+    ngOnInit() {
         this.options = {
             title : { text : 'Weather chart' },
             yAxis: {
                 title: {
-                    text: 'Empty '
+                    text: ''
                 }
             },
             xAxis: {
@@ -29,15 +29,17 @@ export class WeatherChart  {
             }]
         };
     }
+    // Allow chart changes
     saveInstance(chartInstance) {
         this.chart = chartInstance;
     }
+    // Refresh on parent data changes 
     ngOnChanges(){
         if(this.chart !== undefined)
             this.Refresh(); 
     }
+    // Refresh chart propertys 
     Refresh(){
-        console.log(this.myData.y); 
         this.chart.xAxis[0].setCategories(this.myData.x); 
         this.chart.yAxis[0].setTitle({ text: this.myData.y }); 
         this.chart.series[0].setData(this.myData.data); 

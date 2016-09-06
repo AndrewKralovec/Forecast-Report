@@ -1,4 +1,4 @@
-// LimitTo pipe takes one arg and limits the string to that length. If no arg, then defaults to length of 10 
+// Icon pipe returns weather icon image location given the icon value passed in 
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'Icon'

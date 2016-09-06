@@ -6,7 +6,7 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({
             compress: { warnings: false },
             minimize: true,
-            mangle: false // Due to https://github.com/angular/angular/issues/6678
+            mangle: false
         })
     ]
 };
