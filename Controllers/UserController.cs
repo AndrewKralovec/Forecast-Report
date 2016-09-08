@@ -62,7 +62,7 @@ namespace BlueWolf.Controllers
                         }
                     }                           
                 }
-                if(result != null)
+                if(result.Count > 0)
                     return Json(result); 
                 return BadRequest("User not found");                 
             }
