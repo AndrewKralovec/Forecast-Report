@@ -6,16 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BlueWolf.Controllers
 {
-    public class HomeController : Controller
-    {
+    public class HomeController : Controller{
         // Load the index 
-        public IActionResult Index()
-        {
+        public IActionResult Index(){
             return View();
         }
-
-        public IActionResult Error()
-        {
+        public IActionResult Error(){
             return View();
         }
     }

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http' 
 import { History } from '../models/history';
+import { User } from '../models/user';
+
 
 @Injectable()
 export class LoginService {
@@ -17,6 +19,7 @@ export class LoginService {
     // Add user to storage
     login(user){
         localStorage.setItem("user", JSON.stringify(user));
+        console.log(localStorage.getItem("user")); 
         this.router.navigate(['/home']);      
     }
     // Check if user is logged in
@@ -27,8 +30,9 @@ export class LoginService {
     }
     // Find user in database, if exists, and log them in  
     find(email:any, password:any){
+        //let body:User = {email:email, password:password}; 
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.post('/api/User/find', { email:email, password:password },{headers:headers})
+        this.http.post('/api/User/find', {email:email, password:password} ,{headers:headers})
         .map(response  => response.json())
         .subscribe(
             data => this.login(data), 

@@ -8,7 +8,8 @@ namespace BlueWolf.Models
         public string latitude { get; set; }
         public string longitude { get; set; }
         public string date { get; set; }
-        public string toString(){
+        // Override tostring for readability 
+        public override string ToString(){
             return $"{latitude},{longitude}"; 
         }
     }
