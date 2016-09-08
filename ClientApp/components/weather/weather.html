@@ -26,6 +26,11 @@
             </div>
         </div>
     </div>
+    <div class="row" *ngIf="message">
+        <div class="alert alert-success" role="alert">
+            <strong>successfully</strong> successfully loaded new Forecast
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12 col-sm-12">
             <div class="panel-group">
@@ -101,6 +106,6 @@
         </div>
     </div>
 </div>
-<div *ngIf="forecast">
+<div *ngIf="!forecast">
     <h2>Loading....</h2>
 </div>

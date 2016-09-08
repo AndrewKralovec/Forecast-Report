@@ -18,6 +18,7 @@ export class Weather {
     private forecast:Forecast; 
     private address:string; 
     private datetime:string; 
+    private message:boolean = false; 
     // Default location coordniates 
     private location:Location = {
         latitude:41.8093699,
@@ -41,6 +42,7 @@ export class Weather {
             this.fs.getForcast(this.location)
             .subscribe(result => {
                 this.forecast = result ;
+                this.loadMessage(); 
             });
             this.ls.save(this.location); 
         }else{
@@ -63,9 +65,16 @@ export class Weather {
     }
     // Convert to unix time 
     unixFormat(date:string){
-        if(date == null || date == undefined)
+        if(date == null || date == undefined || !parseFloat(date))
             return null; 
         date = date.substring(0, date.indexOf('T'));
         return Math.round(new Date(date).getTime()/1000); 
+    }
+    // Show that new forecast has loaded
+    loadMessage(){
+        this.message = true; 
+        setTimeout(() => {
+            this.message = false;
+        }, 5000);
     }
 }
