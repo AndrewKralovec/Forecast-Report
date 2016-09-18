@@ -1,0 +1,6 @@
+<div *ngIf="myData">
+    <chart [options]="options" (load)="saveInstance($event.context)"></chart>
+</div>
+<div *ngIf="!myData">
+    <h2>Loading....</h2>
+</div>

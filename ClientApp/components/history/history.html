@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="row">
+        <div class="col-md-8 col-lg-8">
+            <h1 class="page-header">Recent Search History
+                <br>
+                <small> View your most recent 100 forecast searches </small>
+            </h1>
+        </div>
+    </div>
+    <div class="row" *ngIf="searchs">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>latitude/longitude</th>
+                        <th>date </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let search of searchs" >
+                        <td>{{search.address}}</td>
+                        <td>{{search.input}}</td>
+                        <td>{{search.date  | date:'medium'}}</td>
+                    </tr>
+                </tbody>
+            </table>  
+        </div>
+    </div>
+</div>
+<div *ngIf="!searchs">
+    <h2>Loading....</h2>
+</div>

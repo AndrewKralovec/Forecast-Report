@@ -1,0 +1,12 @@
+.cloud-header {
+    font-size: 75px;
+}
+
+.cloud-body {
+    font-size: 50px;
+}
+
+.weather-icon {
+    width:128px;
+    height:128px;
+}
