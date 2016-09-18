@@ -32,6 +32,7 @@ export class Weather {
         fs.getForcast(this.location)
         .subscribe(result => {
             this.forecast = result ;
+            console.log(result); 
         }); 
     }
     // Get Forecast information given entered lat/lng, if valid

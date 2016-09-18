@@ -59,6 +59,14 @@
         text-overflow: ellipsis;
     }
 }
+
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+    color: white;
+    background-color: #4189C7;
+    text-decoration: none;
+    border-left: 15px solid #23527c;
+}
+
 .login-panel {
   position: fixed;
   top: 50%;
