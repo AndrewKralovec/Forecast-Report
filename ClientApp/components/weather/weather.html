@@ -16,19 +16,18 @@
         <div class="col-md-4 col-md-6">
             <h3>Current forecast </h3>
             <p>Today: {{forecast.currently.summary}}</p>
-            <p>Now: {{forecast.minutely.summary}}</p>
             <h3>Forecast Details</h3>
             <ul class="list-unstyled"> 
                 <li>
                     Temperature {{forecast.currently.apparentTemperature}} &deg;, 
                 </li>
-                <li>Cloud Cover:  {{forecast.currently.cloudCover}} in./hr.</li>
-                <li>Humidity:  {{forecast.currently.humidity}}</li>
-                <li>Wind speed:  {{forecast.currently.windSpeed}}</li>
-                <li>Precipitation:  {{forecast.currently.precipProbability}} in./hr.</li>
-                <li>Visibility:  {{forecast.currently.visibility}} in./hr.</li>
-                <li>Pressure:  {{forecast.currently.pressure}} in./hr.</li>
-                <li>{{dateFormat(forecast.currently.time) | date:'longDate' }}</li>
+                <li>Cloud Cover:  {{forecast.currently.cloudCover | percent}}</li>
+                <li>Humidity:  {{forecast.currently.humidity  | percent}}</li>
+                <li>Wind speed:  {{forecast.currently.windSpeed}} mph</li>
+                <li>Chance of rain:  {{forecast.currently.precipProbability | percent}} </li>
+                <li>Visibility:  {{forecast.currently.visibility}} </li>
+                <li>Pressure:  {{forecast.currently.pressure}} mb</li>
+                <li><b>{{dateFormat(forecast.currently.time) | date:'longDate' }}</b></li>
             </ul>
         </div>
     </div>
@@ -91,7 +90,6 @@
                                 </div>
                             </div>
                         <div class="panel-footer">
-                            Panel Footer
                         </div>
                     </div>
                 </div>
@@ -125,7 +123,7 @@
                             </li>
                             <li>|</li>
                             <li>
-                                Humidity {{day.humidity}}
+                                Humidity {{day.humidity  | percent}}
                             </li>
                             <li>|</li>
                             <li>

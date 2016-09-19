@@ -26,23 +26,26 @@ namespace BlueWolf.Controllers
         public IActionResult find([FromBody] User user){
             User result = new User();
             using(SqliteConnection con = new SqliteConnection(cs)){
-                con.Open();
-                string stm = $"SELECT * FROM USERS WHERE EMAIL='{user.email}' AND PASSWORD='{user.password}' LIMIT 1";
-                using (SqliteCommand cmd = new SqliteCommand(stm, con)){
-                    using (SqliteDataReader rdr = cmd.ExecuteReader()){
-                        while (rdr.Read()) {
-                            result = new User {
-                                id = rdr.GetInt32(0),
-                                email = rdr.GetString(1)
-                            }; 
-                        }
-                    }                           
-                }
-                con.Close();   
-            }
-            if(result.Equals(user))
-                return Json(result); 
-            return BadRequest("User not found");
+                try{
+                    con.Open();
+                    string stm = $"SELECT * FROM USERS WHERE EMAIL='{user.email}' AND PASSWORD='{user.password}' LIMIT 1";
+                    using (SqliteCommand cmd = new SqliteCommand(stm, con)){
+                        using (SqliteDataReader rdr = cmd.ExecuteReader()){
+                            while (rdr.Read()) {
+                                result = new User {
+                                    id = rdr.GetInt32(0),
+                                    email = rdr.GetString(1)
+                                }; 
+                            }
+                        }                           
+                    }
+                    con.Close(); 
+                    if(result.Equals(user))
+                        return Json(result); 
+                    return BadRequest("User not found");
+                }catch (SqliteException ex) {
+                    return BadRequest(ex); 
+                }            }
         }
         // Get last 100 search history results of the given user from the  database 
         [HttpPost("[action]")]
@@ -50,21 +53,26 @@ namespace BlueWolf.Controllers
             // Keep a list of rows to return to the user 
             List<History> result = new List<History>(); 
             using(SqliteConnection con = new SqliteConnection(cs)){
-                con.Open();
-                string stm = $"SELECT INPUT,DATE  FROM HISTORY WHERE ID='{user.id}' ORDER BY DATE DESC LIMIT 100";
-                using (SqliteCommand cmd = new SqliteCommand(stm, con)){
-                    using (SqliteDataReader rdr = cmd.ExecuteReader()){
-                        while (rdr.Read()) {
-                            result.Add(new History { 
-                                input = rdr.GetString(0), 
-                                date = rdr.GetString(1)  
-                            }); 
-                        }
-                    }                           
+                try{
+                    con.Open();
+                    string stm = $"SELECT INPUT,DATE  FROM HISTORY WHERE ID='{user.id}' ORDER BY DATE DESC LIMIT 100";
+                    using (SqliteCommand cmd = new SqliteCommand(stm, con)){
+                        using (SqliteDataReader rdr = cmd.ExecuteReader()){
+                            while (rdr.Read()) {
+                                result.Add(new History { 
+                                    input = rdr.GetString(0), 
+                                    date = rdr.GetString(1)  
+                                }); 
+                            }
+                        }                           
+                    }
+                    con.Close();   
+                    if(result.Count > 0)
+                        return Json(result); 
+                    return BadRequest("User not found"); 
+                }catch (SqliteException ex) {
+                    return BadRequest(ex); 
                 }
-                if(result.Count > 0)
-                    return Json(result); 
-                return BadRequest("User not found");                 
             }
         }
         // Insert search history in the database
