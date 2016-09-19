@@ -1,6 +1,6 @@
 <!-- Page Content -->
 <div class="container" *ngIf="forecast">
-    <!-- Portfolio Item Heading -->
+    <!-- Weather Heading -->
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Forecast for
@@ -8,12 +8,12 @@
             </h1>
         </div>
     </div>
-    <!-- Portfolio Item Row -->
+    <!-- Weather Row -->
     <div class="row">
         <div class="col-md-6 col-lg-6">
             <img class="img-responsive cloud-header" src="{{forecast.currently.icon | Icon}}"><br>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 col-md-6">
             <h3>Current forecast </h3>
             <p>Today: {{forecast.currently.summary}}</p>
             <p>Now: {{forecast.minutely.summary}}</p>
@@ -30,6 +30,14 @@
                 <li>Pressure:  {{forecast.currently.pressure}} in./hr.</li>
                 <li>{{dateFormat(forecast.currently.time) | date:'longDate' }}</li>
             </ul>
+        </div>
+    </div>
+    <div class="row" *ngIf="message">
+        <div class="alert alert-success" role="alert">
+            <strong>successfully</strong> successfully loaded new Forecast
+        </div>
+        <div class="alert alert-info" *ngIf="dateMessage">
+             Date was invalid
         </div>
     </div>
     <!-- Search Weather Row -->
