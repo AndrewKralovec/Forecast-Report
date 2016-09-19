@@ -84,6 +84,7 @@
                                     <hr>
                                     <p>Pick Date and Time <code>(Optional)</code></p>
                                     <input type="datetime-local" class="form-control" [(ngModel)]="datetime" (change)="datetime=$event.target.value">
+                                    <p>Example: "2015-03-25T12:00:00"</p>
                                 </div>
                                 <div class="alert alert-warning">
                                     <p *ngIf="!datetime">Incomplete date</p>
