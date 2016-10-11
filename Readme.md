@@ -1,20 +1,21 @@
-# BlueWolf
+# SkyCast
 Forecast Web Application
 
 # About
-BlueWolf is a ASP.NET CORE application with c# for the back end and Angular 2 with typescript for the front end. 
+SkyCast is a ASP.NET CORE application with c# for the back end and Angular 2 with typescript for the front end. 
 The client side code is located under the ClientApp folder in the root directory  
 Webpack is being used for building and bundling client-side resources.  
 Bootstrap is used for layout and styling.  
-BlueWolf uses a Sqlite database called BlueWolf.db located under the DB folder in the root directory. Its made of two tables USERS and History.  
+SkyCast uses a Sqlite database called BlueWolf.db located under the DB folder in the root directory. Its made of two tables USERS and History. The database will stay as a sqlite database, but is being imporved to include the asp.net identiy framework i the next project update. 
 There are two third party API's forecast.io and Google Maps. The forecast.io API key is stored under secrets and the Google Maps key is a public one.  
 Highchairs is used as the visualization library to view forecast information.  
 X-unit is used for unit testing   
 
 # Requirements
-BlueWolf would like their users to be able to enter in any location and retrieve current and useful information about the weather in that area, as well as a future forecast.  
-Include charts for historic weather information about that area using any visualization library of your choice, allowing the user to see relevant information within a reasonable time period.  
-Additionally, the team feels that allowing a user to track his or her search history would be a valuable addition, and would like to see a way of storing queries made by a specific user between browser sessions.  
+Users would like their users to be able to enter in any location and retrieve current and useful information about the weather in that area, as well as a future forecast.  
+Charts should be included for historic weather information about that area using any visualization library of the developers choice, allowing the user to see relevant information within a reasonable time period.  
+Users feels that allowing a user to track his or her search history would be a valuable addition, and would like to see a way of storing queries made by a specific user between browser sessions.
+Users want clean looking website with its own custome icons of the developers choice. 
 
 # Controllers:
 There are three controllers, Home, Forecast, and User located under the Controllers folder in the root directory.  
@@ -39,7 +40,7 @@ username:test@yahoo.com    password:1234
 #  Author 
 **Andrew kralovec**, email: [akrala@yahoo.com](mailto:akrala@yahoo.com)
 
-# Start BlueWolf 
+# Start SkyCast 
 cd AndrewKralovec
 npm install
 dotnet restore
