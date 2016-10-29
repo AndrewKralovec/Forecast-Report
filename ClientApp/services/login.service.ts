@@ -19,7 +19,6 @@ export class LoginService {
     // Add user to storage
     login(user){
         localStorage.setItem("user", JSON.stringify(user));
-        console.log(localStorage.getItem("user")); 
         this.router.navigate(['/home']);      
     }
     // Check if user is logged in
@@ -56,7 +55,9 @@ export class LoginService {
         this.http.post('/api/User/saveHistory', body, {headers:headers})
         .map(response  => response.json())
         .subscribe(result => {
-            console.log(result);
+            if(!result){
+                console.log(result); 
+            }
         }); 
     }
     // Alert user of error 

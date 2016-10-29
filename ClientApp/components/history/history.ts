@@ -8,7 +8,8 @@ import { History } from '../../models/history';
     selector: 'search-history',
     directives: [FORM_DIRECTIVES],
     providers: [LoginService, ForecastService],
-    template: require('./history.html')
+    template: require('./history.html'),
+    styleUrls:['./css/history.css']
 })
 export class SearchHistory {
     searchs:Array<History> = new Array<History>();

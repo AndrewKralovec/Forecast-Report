@@ -1,0 +1,14 @@
+.cloud-header {
+    height: 350px;
+}
+.cloud-header img{
+    font-size: 75px;
+}
+.cloud-body {
+    font-size: 50px;
+}
+
+.weather-icon {
+    width:128px;
+    height:128px;
+}

@@ -45,7 +45,7 @@ export class Chart {
         }); 
     }
     // Selection change 
-    onChange(value) {
+    onChange(value:any) {
         this.dateSet = {
             x : this.dateSet.x, 
             y : value.key,
