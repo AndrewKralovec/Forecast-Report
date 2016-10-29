@@ -50,8 +50,8 @@ namespace BlueWolf.Controllers
                     var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded) {
                         logger.LogInformation(1, "User logged in.");
-                        // var b = await userManager.FindByEmailAsync(model.Email);
-                        return Json("User logged in."); 
+                        var user = await userManager.FindByEmailAsync(model.Email);
+                        return Json(user); 
                     }
                     if (result.RequiresTwoFactor) {
                         return BadRequest(new { ErrorMessage = "Login requiest two factor"}); 
@@ -67,7 +67,7 @@ namespace BlueWolf.Controllers
                 return BadRequest(ModelState);  
             } catch (Exception ex){
                 logger.LogError("Login exception in Account Controller", ex); 
-                return BadRequest(new { ErrorMessage = "Unexpected Error"}); 
+                return BadRequest("Unexpected Error"); 
                 // return BadRequest(new { ErrorMessage = "Account is locked." }); 
             }
         }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BlueWolf.Models;
 using BlueWolf.Models.Account;
 
 namespace BlueWolf.Data

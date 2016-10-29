@@ -21,6 +21,23 @@ export class LoginService {
         localStorage.setItem("user", JSON.stringify(user));
         this.router.navigate(['/home']);      
     }
+    register(email:any, password:any, confirm:any){
+        //let body:User = {email:email, password:password}; 
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let body = {Email:email, Password:password,ConfirmPassword:confirm }; 
+        console.log(body); 
+        this.http.post('/api/Account/Register', body ,{headers:headers})
+        .map(response  => response.json())
+        .subscribe(
+             response => { 
+                 console.log("Success !!!:\n"+response); 
+                 this.router.navigate(['/home']);
+            }, 
+            error => {
+                 console.log("Error !!!:\n"+error); 
+            }
+        );
+    }
     // Check if user is logged in
     isLoggedIn(){
         if(localStorage.getItem("user") == null || localStorage.getItem("user") == undefined )
@@ -29,13 +46,20 @@ export class LoginService {
     }
     // Find user in database, if exists, and log them in  
     find(email:any, password:any){
-        //let body:User = {email:email, password:password}; 
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        this.http.post('/api/User/find', {email:email, password:password} ,{headers:headers})
+        let body = { Email:email, Password:password,RememberMe:false }; 
+        console.log(body); 
+        this.http.post('/api/Account/Login', body ,{headers:headers})
         .map(response  => response.json())
         .subscribe(
-            data => this.login(data), 
-            error => this.userError(error)
+             response => { 
+                 console.log("Response !!!:\n"); 
+                 this.login(response); 
+            }, 
+            error => {
+                 console.log("Error !!!:\n"); 
+                 this.userError(error); 
+            }
         );
     }
     // Get user search history from server
