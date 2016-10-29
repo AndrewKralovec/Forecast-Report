@@ -8,7 +8,7 @@ import { User } from '../../models/user';
     directives: [FORM_DIRECTIVES],
     providers: [LoginService],
     template: require('./login.html'),
-    styleUrls:['./css/login.css']
+    styleUrls:['./styles/login.css']
 })
 export class Login {
     constructor(private ls:LoginService){

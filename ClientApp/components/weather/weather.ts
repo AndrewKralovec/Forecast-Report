@@ -12,7 +12,7 @@ import { Icon } from '../../pipes/icon';
     providers: [ForecastService, LoginService], 
     pipes:[Icon],
     template: require('./weather.html'),
-    styleUrls:['./css/weather.css']
+    styleUrls:['./styles/weather.css']
 })
 export class Weather {
     // Current ForecastS

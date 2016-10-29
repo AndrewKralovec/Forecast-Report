@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'home',
   template: require('./home.html'),
-  styleUrls:['./css/home.css']
+  styleUrls:['./styles/home.css']
 })
 export class Home {
 }

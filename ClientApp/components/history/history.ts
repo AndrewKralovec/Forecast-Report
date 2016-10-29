@@ -9,7 +9,7 @@ import { History } from '../../models/history';
     directives: [FORM_DIRECTIVES],
     providers: [LoginService, ForecastService],
     template: require('./history.html'),
-    styleUrls:['./css/history.css']
+    styleUrls:['./styles/history.css']
 })
 export class SearchHistory {
     searchs:Array<History> = new Array<History>();
