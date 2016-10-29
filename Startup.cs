@@ -40,33 +40,34 @@ namespace BlueWolf
             // Add framework services
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });        }
+            });        
+        }
         // Configure the HTTP request pipeline
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory){
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            // Allow webpack to rebuild 
-            if (env.IsDevelopment()){
+            // Configure hot module replacement
+            if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
                     HotModuleReplacement = true
                 });
             }
-            else{
+            else {
                 app.UseExceptionHandler("/Home/Error");
             }
-            // configure middleware for static files to be served to the pipeline. 
             app.UseStaticFiles();
-            // Add external authentication middleware
-            app.UseMvc(routes =>{
+            // Enabled Identity
+            app.UseIdentity();
+            // Confgure routes 
+            app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"
-                );
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
                 routes.MapSpaFallbackRoute(
                     name: "spa-fallback",
-                    defaults: new { controller = "Home", action = "Index"
-                });
+                    defaults: new { controller = "Home", action = "Index" });
             });
         }
     }
