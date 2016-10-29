@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using BlueWolf.Models; 
 using BlueWolf.Models.Account; 
+using BlueWolf.Data; 
 
 namespace BlueWolf
 {
@@ -30,6 +31,12 @@ namespace BlueWolf
         public void ConfigureServices(IServiceCollection services){
             // Add framework services.
             services.Configure<AppKeyConfig>(Configuration.GetSection("AppKeys"));
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("AccountConnection")));
+            // Add Identify servies 
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
             // Add framework services
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
