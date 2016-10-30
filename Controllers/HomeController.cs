@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlueWolf.Controllers
+namespace SkyCast.Controllers
 {
     public class HomeController : Controller{
         // Load the index 

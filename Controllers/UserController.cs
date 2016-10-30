@@ -8,9 +8,9 @@ using Microsoft.Data.Sqlite;
 using Microsoft.Data.Sqlite.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
-using BlueWolf.Models; 
+using SkyCast.Models; 
 
-namespace BlueWolf.Controllers
+namespace SkyCast.Controllers
 {
     [Route("api/[controller]")]
     public class UserController : Controller{
@@ -19,7 +19,7 @@ namespace BlueWolf.Controllers
         // Set up the hostingEnvironment and connection string paths     
         public UserController(IHostingEnvironment hostingEnvironment){
             this.hostingEnvironment = hostingEnvironment ; 
-            cs = $"Data Source={hostingEnvironment.ContentRootPath}/DB/BlueWolf.db"; 
+            cs = $"Data Source={hostingEnvironment.ContentRootPath}/DB/SkyCast.db"; 
         }
         // Search the database for the uesr, if exists 
         [HttpPost("[action]")]

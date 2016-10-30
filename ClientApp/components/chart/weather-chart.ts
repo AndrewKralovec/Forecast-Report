@@ -30,7 +30,7 @@ export class WeatherChart  {
         };
     }
     // Allow chart changes
-    saveInstance(chartInstance) {
+    saveInstance(chartInstance:any) {
         this.chart = chartInstance;
     }
     // Refresh on parent data changes 

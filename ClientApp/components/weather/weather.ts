@@ -11,7 +11,8 @@ import { Icon } from '../../pipes/icon';
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
     providers: [ForecastService, LoginService], 
     pipes:[Icon],
-    template: require('./weather.html')
+    template: require('./weather.html'),
+    styleUrls:['./styles/weather.css']
 })
 export class Weather {
     // Current ForecastS
@@ -19,6 +20,8 @@ export class Weather {
     private address:string; 
     private datetime:string; 
     private message:boolean = false; 
+    private dateMessage:boolean = false;  
+
     // Default location coordniates 
     private location:Location = {
         latitude:41.8093699,
@@ -65,9 +68,14 @@ export class Weather {
     }
     // Convert to unix time 
     unixFormat(date:string){
-        if(date == null || date == undefined || !parseFloat(date))
+        if(date == null || date == undefined)
             return null; 
         date = date.substring(0, date.indexOf('T'));
+        // Check if they entered a valid date
+        if (isNaN(new Date(date).getTime())) {
+            this.dateMessage = true; 
+            return null; 
+        }
         return Math.round(new Date(date).getTime()/1000); 
     }
     // Show that new forecast has loaded
@@ -75,6 +83,7 @@ export class Weather {
         this.message = true; 
         setTimeout(() => {
             this.message = false;
+            this.dateMessage = false; 
         }, 5000);
     }
 }

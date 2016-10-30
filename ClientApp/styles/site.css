@@ -60,47 +60,11 @@
     }
 }
 
-.cloud-header {
-    font-size: 75px;
-}
-
-.cloud-body {
-    font-size: 50px;
-}
-
-.weather-icon {
-    width:128px;
-    height:128px;
-}
-
-.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
-  background-color: #4189C7;
-  color:#eeeeee;
-}
-
-.intro-header {
-    padding-top: 50px;
-    padding-bottom: 50px;
-    text-align: center;
-    color: #f8f8f8;
-    background: url(http://localhost:5000/images/Front.jpg) no-repeat center center;
-    background-size: cover;
-}
-
-.intro-message {
-    position: relative;
-    padding-top: 20%;
-    padding-bottom: 20%;
-}
-
-.intro-message > h1 {
-    margin: 0;
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-    font-size: 5em;
-}
-
-.intro-message > h3 {
-    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+.navbar-inverse .navbar-nav > li > a:focus, .navbar-inverse .navbar-nav > li > a:hover {
+    color: white;
+    background-color: #4189C7;
+    text-decoration: none;
+    border-left: 15px solid #23527c;
 }
 
 .login-panel {
