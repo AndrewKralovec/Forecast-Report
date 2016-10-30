@@ -35,6 +35,8 @@ namespace SkyCast
         public void ConfigureServices(IServiceCollection services){
             // Add framework services.
             services.Configure<AppKeyConfig>(Configuration.GetSection("AppKeys"));
+            services.AddDbContext<ForecastContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("ForecastConnection")));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("AccountConnection")));
             // Add Identify servies 

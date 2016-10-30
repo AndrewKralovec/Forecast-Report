@@ -47,49 +47,12 @@ namespace SkyCast.Controllers
         // Get last 100 search history results of the given user from the  database 
         [HttpPost("[action]")]
         public IActionResult getHistory([FromBody] User user){
-            // Keep a list of rows to return to the user 
-            List<History> result = new List<History>(); 
-            using(SqliteConnection con = new SqliteConnection(cs)){
-                con.Open();
-                string stm = $"SELECT INPUT,DATE  FROM HISTORY WHERE ID='{user.id}' ORDER BY DATE DESC LIMIT 100";
-                using (SqliteCommand cmd = new SqliteCommand(stm, con)){
-                    using (SqliteDataReader rdr = cmd.ExecuteReader()){
-                        while (rdr.Read()) {
-                            result.Add(new History { 
-                                input = rdr.GetString(0), 
-                                date = rdr.GetString(1)  
-                            }); 
-                        }
-                    }                           
-                }
-                if(result.Count > 0)
-                    return Json(result); 
                 return BadRequest("User not found");                 
-            }
         }
         // Insert search history in the database
         [HttpPost("[action]")]
-        public IActionResult saveHistory([FromBody] History history){
-            using(SqliteConnection con = new SqliteConnection(cs)){
-                // Try to insert history data 
-                try{
-                    con.Open();
-                    using (SqliteCommand cmd = new SqliteCommand()){
-                        cmd.Connection = con ;
-                        cmd.CommandText = "INSERT INTO HISTORY(ID, INPUT, DATE) VALUES(@id, @input, @date)";
-                        cmd.Prepare();
-                        
-                        cmd.Parameters.AddWithValue("@id", history.id);
-                        cmd.Parameters.AddWithValue("@input", history.input);
-                        cmd.Parameters.AddWithValue("@date", history.date);
-                        cmd.ExecuteNonQuery();
-                    }
-                    con.Close();   
-                    return Json(null);
-                }catch (SqliteException ex) {
-                    return BadRequest(ex); 
-                }
-            }
+        public IActionResult saveHistory() {
+            return BadRequest(); 
         }
     }
 }
