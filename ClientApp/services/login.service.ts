@@ -21,10 +21,10 @@ export class LoginService {
         localStorage.setItem("user", JSON.stringify(user));
         this.router.navigate(['/home']);      
     }
-    register(email:any, password:any, confirm:any){
+    register(firstName:string, lastName:string, userName:string, email:string, password:string, confirm:string){
         //let body:User = {email:email, password:password}; 
         let headers = new Headers({ 'Content-Type': 'application/json' });
-        let body = {Email:email, Password:password,ConfirmPassword:confirm }; 
+        let body = { Email:email, Password:password, ConfirmPassword:confirm, UserName:userName, FirstName:firstName, LastName:lastName }; 
         console.log(body); 
         this.http.post('/api/Account/Register', body ,{headers:headers})
         .map(response  => response.json())

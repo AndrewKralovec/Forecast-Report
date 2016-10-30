@@ -29,7 +29,7 @@ namespace SkyCast.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterViewModel model) {
             try {
                 if (ModelState.IsValid) {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                     var result = await userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded) {
                         await signInManager.SignInAsync(user, isPersistent: false);

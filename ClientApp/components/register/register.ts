@@ -4,7 +4,7 @@ import { LoginService } from '../../services/login.service';
 // import {FormGroup, FormControl, FormBuilder, Validators, REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
 
 @Component({
-    selector: 'login',
+    selector: 'register',
     directives: [FORM_DIRECTIVES],
     providers: [LoginService],
     template: require('./register.html'),
@@ -14,7 +14,7 @@ export class Register {
     constructor(private ls:LoginService){
     }
     // Register user
-    register(email: any, password: any, confirm: any){
-        this.ls.register(email, password, confirm); 
+    register(firstName:string, lastName:string, userName:string, email:string, password:string, confirm:string){
+        this.ls.register(firstName, lastName, userName, email, password, confirm); 
     }
 }
