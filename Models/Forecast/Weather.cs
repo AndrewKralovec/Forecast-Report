@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SkyCast.Models.Forecast
 {
-    public class History
+    public class Weather
     {
         public int ID { get; set; }
         public string Input { get; set; }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SkyCast.Models; 
 using SkyCast.Models.Account; 
+using SkyCast.Models.Forecast; 
 using SkyCast.Data; 
 
 namespace SkyCast
@@ -49,7 +50,7 @@ namespace SkyCast
             });        
         }
         // Configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory){
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, ForecastContext context){
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
             // Configure hot module replacement
@@ -75,6 +76,7 @@ namespace SkyCast
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+            DbInitializer.Initialize(context); 
         }
     }
 }

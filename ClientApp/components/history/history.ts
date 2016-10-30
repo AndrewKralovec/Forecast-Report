@@ -18,7 +18,7 @@ export class SearchHistory {
         ls.getHistory()
         .subscribe(result => {
             this.searchs = result ;
-            this.searchs.forEach(s =>{
+            this.searchs.forEach(s => {
                 this.fs.getGeocode(s.input).subscribe(response =>{
                     s.address = response.results[0].formatted_address; 
                 });

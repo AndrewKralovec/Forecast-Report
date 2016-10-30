@@ -1,37 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Headers } from '@angular/http' 
-import { History } from '../models/history';
-import { User } from '../models/user';
+import { Observable } from 'rxjs/Rx';
 
+const headers = new Headers({ 'Content-Type': 'application/json' });
 
 @Injectable()
 export class LoginService {
     constructor(private router:Router, private http:Http){
     }
     // Remove user from storage
-    logout() {
+    logout():void {
         if(this.isLoggedIn){
             localStorage.removeItem("user");
             this.router.navigate(['/login']);
         }
     }
     // Add user to storage
-    login(user){
+    login(user):void {
         localStorage.setItem("user", JSON.stringify(user));
         this.router.navigate(['/home']);      
     }
-    register(firstName:string, lastName:string, userName:string, email:string, password:string, confirm:string){
-        //let body:User = {email:email, password:password}; 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+    register(firstName:string, lastName:string, userName:string, email:string, password:string, confirm:string):void {
         let body = { Email:email, Password:password, ConfirmPassword:confirm, UserName:userName, FirstName:firstName, LastName:lastName }; 
         console.log(body); 
-        this.http.post('/api/Account/Register', body ,{headers:headers})
+        this.http.post('/api/Account/Register', body, {headers:headers})
         .map(response  => response.json())
         .subscribe(
              response => { 
-                 console.log("Success !!!:\n"+response); 
-                 this.router.navigate(['/home']);
+                 console.log(response.message); 
+                 this.login(response.user)
             }, 
             error => {
                  console.log("Error !!!:\n"+error); 
@@ -39,22 +37,21 @@ export class LoginService {
         );
     }
     // Check if user is logged in
-    isLoggedIn(){
+    isLoggedIn():boolean {
         if(localStorage.getItem("user") == null || localStorage.getItem("user") == undefined )
             return false;
         return true;  
     }
     // Find user in database, if exists, and log them in  
-    find(email:any, password:any){
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+    find(email:any, password:any):void {
         let body = { Email:email, Password:password,RememberMe:false }; 
         console.log(body); 
-        this.http.post('/api/Account/Login', body ,{headers:headers})
+        this.http.post('/api/Account/Login', body, {headers:headers})
         .map(response  => response.json())
         .subscribe(
              response => { 
-                 console.log("Response !!!:\n"); 
-                 this.login(response); 
+                 console.log(response.message); 
+                 // this.login(response.user); 
             }, 
             error => {
                  console.log("Error !!!:\n"); 
@@ -62,27 +59,46 @@ export class LoginService {
             }
         );
     }
+    test(){
+        this.http.get('/api/User/getTest')
+        .map(response  => response.json())
+        .subscribe(
+             response => { 
+                 console.log(response.message); 
+            }, 
+            error => {
+                 console.log("Error !!!:\n"); 
+            }
+        ); 
+    }
+    // Ger stored user
+    getUser():any {
+        if(this.isLoggedIn()){
+            return JSON.parse(localStorage.getItem("user")); 
+        }
+    }
     // Get user search history from server
-    getHistory(){
-        let headers = new Headers({ 'Content-Type': 'application/json' });
+    getHistory():Observable<any> {
         return this.http.post('/api/User/getHistory', JSON.parse(localStorage.getItem("user")),{headers:headers})
         .map(response  => response.json()); 
     }
-    // save searchs to the server
-    save(input:any) {
+    // Save searchs to the server
+    save(input:any):void {
         let body = {
             id:JSON.parse(localStorage.getItem("user")).id, 
             input:`${input.latitude},${input.longitude}`, 
             date: Date.now()
         }; 
-        let headers = new Headers({ 'Content-Type': 'application/json' });
         this.http.post('/api/User/saveHistory', body, {headers:headers})
         .map(response  => response.json())
-        .subscribe(result => {
-            if(!result){
-                console.log(result); 
+        .subscribe(
+             response => { 
+                 console.log(response.message); 
+            }, 
+            error => {
+                 console.log("Error !!!:\n"); 
             }
-        }); 
+        ); 
     }
     // Alert user of error 
     userError(error){
