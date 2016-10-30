@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using BlueWolf.Models;
-using BlueWolf.Models.Account;
+using SkyCast.Models;
+using SkyCast.Models.Account;
 
-namespace BlueWolf.Data
+namespace SkyCast.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options) {

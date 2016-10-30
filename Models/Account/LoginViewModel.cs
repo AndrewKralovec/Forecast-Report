@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlueWolf.Models.Account
+namespace SkyCast.Models.Account
 {
     public class LoginViewModel {
         [Required]

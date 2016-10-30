@@ -1,5 +1,5 @@
 {
-  "userSecretsId": "aspnet-BlueWolf-319f2b0b-716b-4af5-9d8f-6397c659d0a9",
+  "userSecretsId": "aspnet-SkyCast-319f2b0b-716b-4af5-9d8f-6397c659d0a9",
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
@@ -91,7 +91,7 @@
   },
 
   "tooling": {
-    "defaultNamespace": "BlueWolf"
+    "defaultNamespace": "SkyCast"
   },
   "testRunner": "xunit"
 }

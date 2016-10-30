@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using BlueWolf.Models; 
-using BlueWolf.Models.Account; 
+using SkyCast.Models; 
+using SkyCast.Models.Account; 
 
 
-namespace BlueWolf.Controllers
+namespace SkyCast.Controllers
 {
     [Route("api/[controller]")]
     public class AccountController : Controller {

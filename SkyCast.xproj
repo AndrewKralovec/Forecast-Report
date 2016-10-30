@@ -8,7 +8,7 @@
   <Import Project="$(VSToolsPath)\DNX\Microsoft.DNX.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>60adbd18-4ac7-4b52-985c-6b67afe67b70</ProjectGuid>
-    <RootNamespace>BlueWolf</RootNamespace>
+    <RootNamespace>SkyCast</RootNamespace>
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>

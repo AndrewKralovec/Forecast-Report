@@ -10,11 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using BlueWolf.Models; 
-using BlueWolf.Models.Account; 
-using BlueWolf.Data; 
+using SkyCast.Models; 
+using SkyCast.Models.Account; 
+using SkyCast.Data; 
 
-namespace BlueWolf
+namespace SkyCast
 {
     public class Startup{
         // Set up request handling logic

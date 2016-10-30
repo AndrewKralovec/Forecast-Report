@@ -7,8 +7,8 @@ using Microsoft.Extensions.Options;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
-using BlueWolf.Models; 
-namespace BlueWolf.Controllers
+using SkyCast.Models; 
+namespace SkyCast.Controllers
 {
     [Route("api/[controller]")]
     public class ForecastController : Controller{

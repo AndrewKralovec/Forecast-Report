@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace BlueWolf.Models
+namespace SkyCast.Models
 {
     public class Location
     {

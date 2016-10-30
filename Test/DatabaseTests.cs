@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Data.Sqlite;
 using Microsoft.Data.Sqlite.Utilities;
-using BlueWolf.Models; 
-using BlueWolf.Controllers; 
+using SkyCast.Models; 
+using SkyCast.Controllers; 
 
-namespace BlueWolf.Test  
+namespace SkyCast.Test  
 {
     public class DatacaseTests{
-        public const string cs =  "Data Source= /home/andrew/workspace/CSharp/LinuxASP/AndrewKralovec/DB/BlueWolf.db"; 
+        public const string cs =  "Data Source= /home/andrew/workspace/CSharp/LinuxASP/AndrewKralovec/DB/SkyCast.db"; 
         public User user = new User{
             id = 2, 
             email = "root@test.com",

@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using BlueWolf.Models; 
-using BlueWolf.Controllers; 
+using SkyCast.Models; 
+using SkyCast.Controllers; 
 
-namespace BlueWolf.Test  
+namespace SkyCast.Test  
 {
     public class HomeControllerTests
     {

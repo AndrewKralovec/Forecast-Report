@@ -6,7 +6,7 @@ SkyCast is a ASP.NET CORE application with c# for the back end and Angular 2 wit
 The client side code is located under the ClientApp folder in the root directory  
 Webpack is being used for building and bundling client-side resources.  
 Bootstrap is used for layout and styling.
-SkyCast uses a Sqlite database called BlueWolf.db located under the DB folder in the root directory. Its made of two tables USERS and History. The database will stay as a sqlite database, but is being improved to include the asp.net identity framework in the next project update. Vast amount of other improvements will be made, such as hashing passwords, storing tokens, ect.  
+SkyCast uses a Sqlite database called SkyCast.db located under the DB folder in the root directory. Its made of two tables USERS and History. The database will stay as a sqlite database, but is being improved to include the asp.net identity framework in the next project update. Vast amount of other improvements will be made, such as hashing passwords, storing tokens, ect.  
 There are two third party API's forecast.io and Google Maps. The forecast.io API key is stored under secrets and the Google Maps key is a public one.  
 Highchairs is used as the visualization library to view forecast information.  
 X-unit is used for unit testing   
