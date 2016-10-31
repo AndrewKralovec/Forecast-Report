@@ -43,10 +43,10 @@ namespace SkyCast.Controllers
                         });
                     }
                 }
-                return BadRequest(new { ErrorMessage = "Account is locked." });
+                return BadRequest(new { Message = "Account is locked." });
             } catch (Exception ex) {
                 logger.LogError("Register exception in Account Controller", ex); 
-                return BadRequest(new { ErrorMessage = "Unexpected Error"}); 
+                return BadRequest(new { Message = "Unexpected Error"}); 
             }
         }        
         [HttpPost("[action]")]
@@ -58,31 +58,36 @@ namespace SkyCast.Controllers
                         logger.LogInformation(1, "User logged in.");
                         var user = await userManager.GetUserAsync(HttpContext.User); 
                         return Json(new {
-                             Message = "New user Account created", 
+                             Message = "User logged in", 
                              User = new { Id = user.Id, Username = user.UserName } 
                         });                    }
                     if (result.RequiresTwoFactor) {
-                        return BadRequest(new { ErrorMessage = "Login requiest two factor"}); 
+                        return BadRequest(new { Message = "Login requiest two factor"}); 
                     }
                     if (result.IsLockedOut) {
                         logger.LogWarning(2, "User account locked out.");
-                        return BadRequest(new { ErrorMessage = "User account locked out"}); 
+                        return BadRequest(new { Message = "User account locked out"}); 
                     }
                     else {
-                        return BadRequest(new { ErrorMessage = "Invalid login attempt"}); 
+                        return BadRequest(new { Message = "Invalid login attempt"}); 
                     }
                 }
                 return BadRequest(ModelState);  
             } catch (Exception ex){
                 logger.LogError("Login exception in Account Controller", ex); 
-                return BadRequest("Unexpected Error"); 
+                return BadRequest(new { Message = "Unexpected Error"}); 
             }
         }
         [HttpGet("[action]")]
         public async Task<IActionResult> LogOff() {
-            await signInManager.SignOutAsync();
-            logger.LogInformation(4, "User logged out.");
-            return Json("Logged out"); 
+            try {
+                await signInManager.SignOutAsync();
+                logger.LogInformation(4, "User logged out.");
+                return Json("Logged out"); 
+            } catch (Exception ex){
+                logger.LogError("Login exception in Account Controller", ex); 
+                return BadRequest(new { Message = "Unexpected Error"}); 
+            }
         }
     }
 }

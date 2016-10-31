@@ -3,13 +3,13 @@ import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { Forecast } from '../../models/forecast';
 import { Location } from '../../models/location';
 import { ForecastService } from '../../services/forecast.service.ts';
-import { LoginService } from '../../services/login.service';
+import { HistoryService } from '../../services/history.service';
 import { Icon } from '../../pipes/icon';
 
 @Component({
     selector: 'weather',
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
-    providers: [ForecastService, LoginService], 
+    providers: [ForecastService, HistoryService], 
     pipes:[Icon],
     template: require('./weather.html'),
     styleUrls:['./styles/weather.css']
@@ -28,7 +28,7 @@ export class Weather {
         longitude:-89.8093699
     }; 
     // Load in a default location 
-    constructor(private fs:ForecastService, private ls: LoginService){
+    constructor(private fs:ForecastService, private hs: HistoryService){
         fs.getForcast(this.location)
         .subscribe(result => {
             this.forecast = result ;
@@ -47,7 +47,7 @@ export class Weather {
                 this.forecast = result ;
                 this.loadMessage(); 
             });
-            this.ls.save(this.location); 
+            this.hs.save(this.location); 
         }else{
             alert("Invalid latitude and longitude"); 
         }

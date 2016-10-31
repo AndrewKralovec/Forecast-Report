@@ -17,6 +17,6 @@ export class Login {
     }
     // Login in user
     login(email: any, password: any){
-        this.ls.test(); 
+        this.ls.find(email, password); 
     }
 }

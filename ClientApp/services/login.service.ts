@@ -51,7 +51,7 @@ export class LoginService {
         .subscribe(
              response => { 
                  console.log(response.message); 
-                 // this.login(response.user); 
+                 this.login(response.user); 
             }, 
             error => {
                  console.log("Error !!!:\n"); 
@@ -59,46 +59,11 @@ export class LoginService {
             }
         );
     }
-    test(){
-        this.http.get('/api/User/getTest')
-        .map(response  => response.json())
-        .subscribe(
-             response => { 
-                 console.log(response.message); 
-            }, 
-            error => {
-                 console.log("Error !!!:\n"); 
-            }
-        ); 
-    }
     // Ger stored user
     getUser():any {
         if(this.isLoggedIn()){
             return JSON.parse(localStorage.getItem("user")); 
         }
-    }
-    // Get user search history from server
-    getHistory():Observable<any> {
-        return this.http.post('/api/User/getHistory', JSON.parse(localStorage.getItem("user")),{headers:headers})
-        .map(response  => response.json()); 
-    }
-    // Save searchs to the server
-    save(input:any):void {
-        let body = {
-            id:JSON.parse(localStorage.getItem("user")).id, 
-            input:`${input.latitude},${input.longitude}`, 
-            date: Date.now()
-        }; 
-        this.http.post('/api/User/saveHistory', body, {headers:headers})
-        .map(response  => response.json())
-        .subscribe(
-             response => { 
-                 console.log(response.message); 
-            }, 
-            error => {
-                 console.log("Error !!!:\n"); 
-            }
-        ); 
     }
     // Alert user of error 
     userError(error){

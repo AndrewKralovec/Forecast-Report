@@ -6,22 +6,18 @@ import { Observable } from 'rxjs/Rx';
 const headers = new Headers({ 'Content-Type': 'application/json' });
 
 @Injectable()
-export class UserService {
+export class HistoryService {
     constructor(private router:Router, private http:Http){
     }
     // Get user search history from server
     getHistory():Observable<any> {
-        return this.http.post('/api/User/getHistory', JSON.parse(localStorage.getItem("user")),{headers:headers})
+        return this.http.get('/api/History/getHistory')
         .map(response  => response.json()); 
     }
     // Save searchs to the server
     save(input:any):void {
-        let body = {
-            id:JSON.parse(localStorage.getItem("user")).id, 
-            input:`${input.latitude},${input.longitude}`, 
-            date: Date.now()
-        }; 
-        this.http.post('/api/User/saveHistory', body, {headers:headers})
+        console.log(input)
+        this.http.post('/api/History/saveHistory', input, {headers:headers})
         .map(response  => response.json())
         .subscribe(
              response => { 
@@ -31,10 +27,5 @@ export class UserService {
                  console.log("Error !!!:\n"); 
             }
         ); 
-    }
-    // Alert user of error 
-    userError(error){
-        console.log(error); 
-        alert("The user could not be found, please try again"); 
     }
 }

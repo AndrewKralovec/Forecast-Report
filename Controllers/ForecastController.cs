@@ -22,21 +22,24 @@ namespace SkyCast.Controllers
         // Get Forecast information from forecast.io 
         [HttpPost("[action]")]
         public async Task<IActionResult> CurrentForecasts([FromBody] Location location){
-            string date = null ; 
-            if(location.date != null)
-                date = $",{location.date}";
-            using (var client = new HttpClient()){
-                client.BaseAddress = new Uri(forecastUrl);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                // HTTP get forcast api result
-                HttpResponseMessage response = await client.GetAsync($"forecast/{AppConfigs.ForecastAPIKey}/{location.ToString()}{date}");
-                if (response.IsSuccessStatusCode){
-                    var forecast = await response.Content.ReadAsStringAsync();
-                    return Content(forecast, "application/json");
-                }else {
-                    return BadRequest("Bad request"); 
-                }                
+            try{
+                string date = null ; 
+                if(location.date != null)
+                    date = $",{location.date}";
+                using (var client = new HttpClient()){
+                    client.BaseAddress = new Uri(forecastUrl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    // HTTP get forcast api result
+                    HttpResponseMessage response = await client.GetAsync($"forecast/{AppConfigs.ForecastAPIKey}/{location.ToString()}{date}");
+                    if (response.IsSuccessStatusCode){
+                        var forecast = await response.Content.ReadAsStringAsync();
+                        return Content(forecast, "application/json");
+                    }
+                    return BadRequest(new { Message = "Unexpected Error"}); 
+                }
+            } catch (Exception) {
+                return BadRequest(new { Message = "Unexpected Error"}); 
             }
         }
     }

@@ -1,6 +1,6 @@
 export interface History {
     id?:number; 
     input: any; 
-    date:number; 
+    searchDate:string; 
     address?:any;
 }
