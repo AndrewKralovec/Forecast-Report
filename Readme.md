@@ -29,13 +29,8 @@ Services contains the services that request and map responses to the server cont
 Models contains all the model classes that are used for typecasting data.   
 Components has all the Angular components that present the view to the user and control the logic behind them. When a user first logins in, they are redirected to the login page, all other pages/routes besides home are restricted. After a user logs in they can see historic weather on a chart, see past searches, or search for forecasts. The search can be either by lat/long or by address. The user also has the option to search a date, given a location.    
 
-#  Notes 
-Pages my take some time loading due to server, do not be alarmed if a page first appears blank, it will load. 
-
-
-username:root@test.com     password:linux  
-or  
-username:test@yahoo.com    password:1234  
+#  Preview
+[Preview](https://www.youtube.com/watch?v=Gz09ujnARXk&feature=youtu.be)
 
 #  Author 
 **Andrew kralovec**, email: [akrala@yahoo.com](mailto:akrala@yahoo.com)

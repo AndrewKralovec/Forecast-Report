@@ -36,6 +36,7 @@ namespace SkyCast.Controllers
                 var user = await userManager.GetUserAsync(HttpContext.User);
                 var history = await context.SearchHistory.AsNoTracking()
                 .Where(e => e.Reports.Any(r => r.UserID == user.Id))
+                .Take(100)
                 .ToListAsync();
                 return Json(history); 
             } catch (Exception ex){
